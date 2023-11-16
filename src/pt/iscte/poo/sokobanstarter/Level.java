@@ -26,10 +26,6 @@ public class Level {
 		gui.setSize(GameEngine.GRID_HEIGHT, GameEngine.GRID_WIDTH);
 	}
 	
-	
-
-
-
 	public void createGame() {
 		
 	    try {

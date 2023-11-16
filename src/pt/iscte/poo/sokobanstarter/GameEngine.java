@@ -1,8 +1,9 @@
 package pt.iscte.poo.sokobanstarter;
 
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import pt.iscte.poo.gui.ImageMatrixGUI;
 import pt.iscte.poo.observer.Observed;
 import pt.iscte.poo.observer.Observer;
@@ -19,19 +20,13 @@ public class GameEngine implements Observer {
 	
     private Level level = new Level();
 	private ImageMatrixGUI gui = level.getGui();  		// Referencia para ImageMatrixGUI (janela de interface com o utilizador) 
-	//private int level = 0;	  
-	//private HashMap<Point2D, GameElement> tileMap = level.getTileMap(); 
 	private Empilhadora bobcat;
 	
-
-	// Construtor - neste exemplo apenas inicializa uma lista de ImageTiles
 	private GameEngine() {
 		gui.registerObserver(this);            // 3. registar o objeto ativo GameEngine como observador da GUI
 		gui.go();
 	}
 
-	
-	
 	public static GameEngine getInstance() {
 		if (INSTANCE==null)
 			return INSTANCE = new GameEngine();
@@ -98,13 +93,13 @@ public class GameEngine implements Observer {
 
 	//Verifica se as caixas estão nos alvos
     private boolean boxInPlace() { 
-        List<Caixote> caixotes = new ArrayList<>();
+        //List<Caixote> caixotes = new ArrayList<>();
 
-        for (GameElement ge : level.getTileMap().values()) {//Fazer filtro x2
-        	if (ge instanceof Caixote) {
-                caixotes.add((Caixote) ge);
-            }
-        }
+        List<Caixote> caixotes = level.getTileMap().values()
+        	    .stream()
+        	    .filter(ge -> ge instanceof Caixote)
+        	    .map(ge -> (Caixote) ge)
+        	    .collect(Collectors.toList());
 
         int qntAlvosAtivos = 0;
 
@@ -121,7 +116,7 @@ public class GameEngine implements Observer {
             }
         }
         
-        System.out.println(level.getAlvos().size() + "  " + qntAlvosAtivos);
+        //System.out.println(level.getAlvos().size() + "  " + qntAlvosAtivos);
         return level.getAlvos().size() == qntAlvosAtivos;
     }
 

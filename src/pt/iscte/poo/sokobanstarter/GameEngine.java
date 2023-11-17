@@ -51,7 +51,7 @@ public class GameEngine implements Observer {
 	@Override
 	public void update(Observed source) {
 	    int key = gui.keyPressed();
-	    System.out.println("ola");
+	    System.out.println("ola, o brito esteve aqui");
 	    if(isArrows(key)) {
 		    Direction d = Direction.directionFor(key);
 		    

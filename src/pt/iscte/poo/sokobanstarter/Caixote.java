@@ -17,7 +17,7 @@ public class Caixote extends GameElement implements Movable{
 
 	@Override
 	public int getLayer() {
-		return 2;
+		return 3;
 	}
 	
 	
@@ -34,14 +34,24 @@ public class Caixote extends GameElement implements Movable{
     
     public boolean isPositionValid(Point2D p) {
         GameElement elementAtNewPosition = GameEngine.getInstance().getGameElement(p);
-        return elementAtNewPosition == null || elementAtNewPosition instanceof Bateria || elementAtNewPosition instanceof Alvo;
+        return elementAtNewPosition == null || elementAtNewPosition instanceof Alvo || elementAtNewPosition instanceof Teleporte;
+    }
+    
+    public boolean isTeleport(Point2D p){
+    	 GameElement elementAtNewPosition = GameEngine.getInstance().getGameElement(p);
+         return elementAtNewPosition instanceof Teleporte;
     }
 	
     @Override
     public boolean interact(GameElement other) {
     	Vector2D move = Vector2D.movementVector(other.getPosition(), getPosition());
     	Point2D p = getPosition().plus(move);
+    	GameElement g = GameEngine.getInstance().getGameElement(p);
     	if(isPositionValid(p)) {	
+    		if(isTeleport(p)){
+    			g.interact(this);
+    			return true;
+    		}
     		move(p);
     		return true;
     	}

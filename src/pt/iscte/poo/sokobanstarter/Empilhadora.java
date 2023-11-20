@@ -72,6 +72,7 @@ public class Empilhadora extends GameElement implements Movable {
     public void consumeBattery(Bateria b) {
         addBattery(b.getBattery());
     }
+    
 
 	public int getMoves() {
 		return moves;
@@ -84,7 +85,7 @@ public class Empilhadora extends GameElement implements Movable {
 
     @Override
     public int getLayer() {
-        return 1;
+        return 2;
     }
 
 	@Override

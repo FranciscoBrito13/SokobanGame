@@ -17,6 +17,7 @@ public class Level {
 	private HashMap<Point2D, GameElement> tileMap;
 	private Empilhadora bobcat;
 	List<Alvo> alvos;
+	List<Teleporte> teleportes;
 	private ImageMatrixGUI gui;
 	
 	public Level(){
@@ -71,8 +72,12 @@ public class Level {
 	                    	Alvo a = new Alvo(ponto);
 	                    	tileMap.put(ponto, a);
 	                        tileList.add(a);
+	                        break;
+	                    case 'T':
+	                    	Teleporte t = new Teleporte(ponto);
+	                    	tileMap.put(ponto, t);
+	                    	tileList.add(t);
 	                    default:
-
 	                        tileList.add(new Chao(ponto));
 	                        break;
 	                }
@@ -81,6 +86,7 @@ public class Level {
 	            
 	        }
 	        alvos = loadAlvos();
+	        teleportes = loadTeleportes();
 	        gui.addImages(tileList);
 	    } catch (FileNotFoundException e) {
 	        e.printStackTrace();
@@ -88,7 +94,7 @@ public class Level {
 	}
 
 	private List<Alvo> loadAlvos() {
-	    List<Alvo> alvos = new ArrayList<>();
+	    alvos = new ArrayList<>();
 	    for (GameElement ge : tileMap.values()) {
 	        if (ge instanceof Alvo) {
 	            alvos.add((Alvo) ge);
@@ -96,6 +102,17 @@ public class Level {
 	    }
 	    return alvos;
 	}
+	
+	private List<Teleporte> loadTeleportes() {
+	    teleportes = new ArrayList<>();
+	    for (GameElement ge : tileMap.values()) {
+	        if (ge instanceof Teleporte) {
+	            teleportes.add((Teleporte) ge);
+	        }
+	    }
+	    return teleportes;
+	}
+	
 
 	public int getLevel() {
 		return level;
@@ -132,6 +149,10 @@ public class Level {
 	}
 	public Empilhadora getBobcat() {
 		return bobcat;
+	}
+	
+	public List<Teleporte> getTeleportes(){
+		return teleportes;
 	}
 	
 	

@@ -51,11 +51,9 @@ public class GameEngine implements Observer {
 	@Override
 	public void update(Observed source) {
 	    int key = gui.keyPressed();
-	    System.out.println("ola, o brito esteve aqui");
+
 	    if(isArrows(key)) {
 		    Direction d = Direction.directionFor(key);
-		    
-		    if(d == null)return;
 		    
 		    // Verifica se o bobcat não tem uma parede naquela posição
 		    Point2D nextP = bobcat.getPosition().plus(d.asVector());
@@ -87,7 +85,6 @@ public class GameEngine implements Observer {
 	    } else if(key == KeyEvent.VK_N){
 	    	level.increaseLevel();
 	    }
-
 	    gui.setStatusMessage("Level: " + level.getLevel() + " Energy:" + bobcat.getBateria() + " Moves: " + bobcat.getMoves());
 	    gui.update(); // Update the GUI after the movement
 	}
@@ -139,6 +136,10 @@ public class GameEngine implements Observer {
 
 	public GameElement getGameElement(Point2D p) {
 		return level.getTileMap().get(p);
+	}
+	
+	public List<Teleporte> getTeleportes(){
+		return level.getTeleportes();
 	}
 
 	public void removeElement(Point2D p) {

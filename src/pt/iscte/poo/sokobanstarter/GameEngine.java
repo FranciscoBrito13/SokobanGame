@@ -91,7 +91,6 @@ public class GameEngine implements Observer {
 
 	//Verifica se as caixas estão nos alvos
     private boolean boxInPlace() { 
-        //List<Caixote> caixotes = new ArrayList<>();
 
         List<Caixote> caixotes = level.getTileMap().values()
         	    .stream()
@@ -114,7 +113,6 @@ public class GameEngine implements Observer {
             }
         }
         
-        //System.out.println(level.getAlvos().size() + "  " + qntAlvosAtivos);
         return level.getAlvos().size() == qntAlvosAtivos;
     }
 

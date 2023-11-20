@@ -25,7 +25,6 @@ public class Teleporte extends GameElement{
 		List<Teleporte> teleportes = gEngine.getTeleportes();
 		for(Teleporte t : teleportes){
 			if(!(t.getPosition().equals(position))){
-				System.out.println(t.getPosition());
 				return t;
 			}
 		}
@@ -37,7 +36,6 @@ public class Teleporte extends GameElement{
 		Point2D oldPosition = other.getPosition();
 		other.setPosition(getPair().getPosition());
 		GameEngine.getInstance().relocateObject(oldPosition, other.getPosition(), other);
-		System.out.println(other.getPosition() + other.getName());
 		return false;
 	} 
 

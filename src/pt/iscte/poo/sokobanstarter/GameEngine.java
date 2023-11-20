@@ -55,7 +55,6 @@ public class GameEngine implements Observer {
 	    if(isArrows(key)) {
 		    Direction d = Direction.directionFor(key);
 		    
-		    if(d == null)return;
 		    
 		    // Verifica se o bobcat não tem uma parede naquela posição
 		    Point2D nextP = bobcat.getPosition().plus(d.asVector());

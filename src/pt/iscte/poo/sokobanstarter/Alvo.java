@@ -11,7 +11,7 @@ public class Alvo extends GameElement{
 	
 	@Override
 	public String getName(){
-		return "Alvo"; 
+		return "Alvo2"; 
 	}
 	
 	@Override

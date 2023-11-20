@@ -19,7 +19,7 @@ public class Parede extends GameElement {
 	@Override
 	public int getLayer() {
 		// TODO Auto-generated method stub
-		return 2;
+		return 4;
 	}
 
 	public void interact() {

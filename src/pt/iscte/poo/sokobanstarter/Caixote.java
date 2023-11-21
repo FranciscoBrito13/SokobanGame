@@ -1,5 +1,7 @@
 package pt.iscte.poo.sokobanstarter;
 
+import java.util.List;
+
 import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
 
@@ -27,35 +29,31 @@ public class Caixote extends GameElement implements Movable{
 
     @Override
 	public void move(Point2D p) {
-	    Point2D oldPosition = getPosition();
+	    // Point2D oldPosition = getPosition();
 	    setPosition(p);
-	    GameEngine.getInstance().relocateObject(oldPosition, p, this);
+	    //GameEngine.getInstance().relocateObject(oldPosition, p, this);
 	}
     
     public boolean isPositionValid(Point2D p) {
-        GameElement elementAtNewPosition = GameEngine.getInstance().getGameElement(p);
-        return elementAtNewPosition == null || elementAtNewPosition instanceof Alvo || elementAtNewPosition instanceof Teleporte;
-    }
-    
-    public boolean isTeleport(Point2D p){
-    	 GameElement elementAtNewPosition = GameEngine.getInstance().getGameElement(p);
-         return elementAtNewPosition instanceof Teleporte;
+        List<GameElement> elementsAtNewPosition = GameEngine.getInstance().getGameElement(p);
+        return elementsAtNewPosition == null || elementsAtNewPosition.isEmpty() ||
+                elementsAtNewPosition.stream().anyMatch(ge -> ge instanceof Alvo || ge instanceof Teleporte);
     }
 	
     @Override
     public boolean interact(GameElement other) {
     	Vector2D move = Vector2D.movementVector(other.getPosition(), getPosition());
     	Point2D p = getPosition().plus(move);
-    	GameElement g = GameEngine.getInstance().getGameElement(p);
-    	if(isPositionValid(p)) {	
-    		if(isTeleport(p)){
-    			g.interact(this);
-    			return true;
-    		}
-    		move(p);
-    		return true;
+    	List<GameElement> g = GameEngine.getInstance().getGameElement(p);
+    	
+    	if (isPositionValid(p)) {
+    		for (GameElement ge : g) {
+    			ge.interact(this);
+    	    }
+    	    move(p);
+    	    return true;
     	}
-    	return false;
+		return false;
     	
     	
     }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import pt.iscte.poo.utils.Point2D;
 
+
 public class Teleporte extends GameElement{
 
 	public Teleporte(Point2D position) {
@@ -20,6 +21,7 @@ public class Teleporte extends GameElement{
 		return 1;
 	}
 	
+	
 	private Teleporte getPair(){
 		GameEngine gEngine = GameEngine.getInstance();
 		List<Teleporte> teleportes = gEngine.getTeleportes();
@@ -31,11 +33,15 @@ public class Teleporte extends GameElement{
 		return null;
 	}
 	
+
+	//Verifica se a posição do par tem algum elemento em cima, se tiver não d
 	
 	public boolean interact(GameElement other) {
-		Point2D oldPosition = other.getPosition();
+		List<GameElement> ge = GameEngine.getInstance().getGameElement(getPair().getPosition());
+		if(ge.size() > 1){
+			return true;
+		}
 		other.setPosition(getPair().getPosition());
-		GameEngine.getInstance().relocateObject(oldPosition, other.getPosition(), other);
 		return false;
 	} 
 

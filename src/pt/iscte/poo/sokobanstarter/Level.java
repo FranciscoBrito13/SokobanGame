@@ -3,7 +3,6 @@ package pt.iscte.poo.sokobanstarter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
@@ -14,14 +13,15 @@ import pt.iscte.poo.utils.Point2D;
 public class Level {
 
 	private int level = 0;
-	private HashMap<Point2D, GameElement> tileMap;
+	//private HashMap<Point2D, GameElement> tileMap;
+	private List<GameElement> tileMap;
 	private Empilhadora bobcat;
 	List<Alvo> alvos;
 	List<Teleporte> teleportes;
 	private ImageMatrixGUI gui;
 	
 	public Level(){
-		tileMap = new HashMap<>();
+		tileMap = new ArrayList<>();
 		
 		gui = ImageMatrixGUI.getInstance();
 		gui.setSize(GameEngine.GRID_HEIGHT, GameEngine.GRID_WIDTH);
@@ -43,19 +43,19 @@ public class Level {
 
 	                switch (ch) {
 	                    case '#':
-	                    	tileMap.put(ponto, new Parede(ponto));
+	                    	tileMap.add(new Parede(ponto));
 	                        tileList.add(new Parede(ponto));
 	                        break;
 	                    case 'E':
 	                    	tileList.add(new Chao(ponto));
 	                        bobcat = Empilhadora.getInstance(ponto);
 	                        bobcat.setInitialPosition(ponto);
-	                    	tileMap.put(ponto, bobcat);
+	                    	tileMap.add(bobcat);
 	                        tileList.add(bobcat);
 	                        break;
 	                    case 'C':
 	                    	Caixote caixote = new Caixote(ponto);
-	                        tileMap.put(ponto, caixote);
+	                        tileMap.add(caixote);
 	                        tileList.add(caixote);
 	                        tileList.add(new Chao(ponto));
 	                        
@@ -65,17 +65,17 @@ public class Level {
 	                        break;
 	                    case 'B':
 	                    	Bateria b = new Bateria(ponto);
-	                    	tileMap.put(ponto, b);
+	                    	tileMap.add(b);
 	                        tileList.add(b);
 	                        break;
 	                    case 'X':
 	                    	Alvo a = new Alvo(ponto);
-	                    	tileMap.put(ponto, a);
+	                    	tileMap.add(a);
 	                        tileList.add(a);
 	                        break;
 	                    case 'T':
 	                    	Teleporte t = new Teleporte(ponto);
-	                    	tileMap.put(ponto, t);
+	                    	tileMap.add(t);
 	                    	tileList.add(t);
 	                    default:
 	                        tileList.add(new Chao(ponto));
@@ -95,7 +95,7 @@ public class Level {
 
 	private List<Alvo> loadAlvos() {
 	    alvos = new ArrayList<>();
-	    for (GameElement ge : tileMap.values()) {
+	    for (GameElement ge : tileMap) {
 	        if (ge instanceof Alvo) {
 	            alvos.add((Alvo) ge);
 	        }
@@ -105,7 +105,7 @@ public class Level {
 	
 	private List<Teleporte> loadTeleportes() {
 	    teleportes = new ArrayList<>();
-	    for (GameElement ge : tileMap.values()) {
+	    for (GameElement ge : tileMap) {
 	        if (ge instanceof Teleporte) {
 	            teleportes.add((Teleporte) ge);
 	        }
@@ -117,13 +117,15 @@ public class Level {
 	public int getLevel() {
 		return level;
 	}
+	public void decreaseLevel() {
+		level--;
+		restartLevel();
+	    gui.update();
+	}
 
 	public void increaseLevel() {
 		level++;
-	    tileMap.clear();
-	    gui.clearImages();
-	    createGame(); 
-	    bobcat.resetEmpilhadora();
+		restartLevel();
 	    gui.update();
 	}
 	
@@ -135,7 +137,7 @@ public class Level {
 	}
 
 
-	public HashMap<Point2D, GameElement> getTileMap() {
+	public List<GameElement> getTileMap() {
 		return tileMap;
 	}
 

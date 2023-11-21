@@ -90,9 +90,9 @@ public class Empilhadora extends GameElement implements Movable {
 
 	@Override
 	public void move(Point2D p) {
-	    Point2D oldPosition = getPosition();
+	    //Point2D oldPosition = getPosition();
 	    setPosition(p);
-	    GameEngine.getInstance().relocateObject(oldPosition, p, this);
+	    //GameEngine.getInstance().relocateObject(oldPosition, p, this);
 	    decBateria();
         moves++;
 	}

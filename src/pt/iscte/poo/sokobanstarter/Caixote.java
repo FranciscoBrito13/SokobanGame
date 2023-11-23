@@ -7,11 +7,11 @@ import pt.iscte.poo.utils.Vector2D;
 
 public class Caixote extends GameElement implements Movable{
 
-	
+
 	public Caixote(Point2D position){
 		super(position);
 	}
-	
+
 	@Override
 	public String getName() {
 		return "Caixote";
@@ -21,44 +21,45 @@ public class Caixote extends GameElement implements Movable{
 	public int getLayer() {
 		return 3;
 	}
-	
-	
-    public void setPosition(Point2D position) {
-        this.position = position;
-    }
 
-    @Override
-	public void move(Point2D p) {
-	    // Point2D oldPosition = getPosition();
-	    setPosition(p);
-	    //GameEngine.getInstance().relocateObject(oldPosition, p, this);
+
+	public void setPosition(Point2D position) {
+		this.position = position;
 	}
-    
-    public boolean isPositionValid(Point2D p) {
-        List<GameElement> elementsAtNewPosition = GameEngine.getInstance().getGameElement(p);
-        return elementsAtNewPosition == null || elementsAtNewPosition.isEmpty() ||
-                elementsAtNewPosition.stream().anyMatch(ge -> ge instanceof Alvo || ge instanceof Teleporte);
-    }
+
+	@Override
+	public void move(Point2D p) {
+		setPosition(p);
+	}
+
+	public boolean isPositionValid(Point2D p) {
+		List<GameElement> elementsAtNewPosition = GameEngine.getInstance().getGameElement(p);
+		return elementsAtNewPosition == null || elementsAtNewPosition.isEmpty() ||
+				elementsAtNewPosition.stream().anyMatch(ge -> ge instanceof Alvo || ge instanceof Teleporte);
+	}
 	
-    @Override
-    public boolean interact(GameElement other) {
-    	Vector2D move = Vector2D.movementVector(other.getPosition(), getPosition());
-    	Point2D p = getPosition().plus(move);
-    	List<GameElement> g = GameEngine.getInstance().getGameElement(p);
-    	
-    	if (isPositionValid(p)) {
-    		for (GameElement ge : g) {
-    			ge.interact(this);
-    	    }
-    	    move(p);
-    	    return true;
-    	}
+	
+	@Override
+	public boolean interact(GameElement other) {
+		Vector2D move = Vector2D.movementVector(other.getPosition(), getPosition());
+		Point2D p = getPosition().plus(move);
+		List<GameElement> g = GameEngine.getInstance().getGameElement(p);
+		if(isPositionValid(p)){
+			for (GameElement ge : g) {
+				if(ge instanceof Teleporte){
+					ge.interact(this);
+					return true;
+				}
+			}
+			move(p);
+			return true;
+		}
 		return false;
-    	
-    	
-    }
-    
-    
-    
-    
+	
+
+	}
+
+
+
+
 }

@@ -1,6 +1,6 @@
 package pt.iscte.poo.sokobanstarter;
 
-import java.util.HashMap;
+//import java.util.HashMap;
 
 import pt.iscte.poo.utils.Point2D;
 
@@ -10,7 +10,7 @@ public interface Movable {
 	//Procedimento que implementa o movimento dos objetos que implementam esta interface
 	public void move(Point2D p);
 	
-	public default boolean isPositionValid(Point2D position, HashMap<Point2D, GameElement> tileMap) {return true;};
+	//public default boolean isPositionValid() {return true;};
 	
 
 }

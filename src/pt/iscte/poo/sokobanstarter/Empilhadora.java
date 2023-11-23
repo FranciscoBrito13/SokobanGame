@@ -5,7 +5,7 @@ import pt.iscte.poo.utils.Point2D;
 
 public class Empilhadora extends GameElement implements Movable {
 
-    private static Empilhadora INSTANCE; //Instancia da empilhadora       depois temos de por private
+    private static Empilhadora INSTANCE; //Instancia da empilhadora
     private String imageName = "Empilhadora_U";
     private Point2D initialPosition;
     private int moves;

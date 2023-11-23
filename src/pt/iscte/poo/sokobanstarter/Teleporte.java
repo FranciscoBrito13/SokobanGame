@@ -22,7 +22,7 @@ public class Teleporte extends GameElement{
 	}
 	
 	
-	private Teleporte getPair(){
+	public Teleporte getPair(){
 		GameEngine gEngine = GameEngine.getInstance();
 		List<Teleporte> teleportes = gEngine.getTeleportes();
 		for(Teleporte t : teleportes){
@@ -31,7 +31,13 @@ public class Teleporte extends GameElement{
 			}
 		}
 		return null;
-	}
+	}	
+	
+    public boolean isPositionValid(Point2D p) {
+        List<GameElement> elementsAtNewPosition = GameEngine.getInstance().getGameElement(p);
+        return elementsAtNewPosition == null || elementsAtNewPosition.isEmpty() ||
+                elementsAtNewPosition.stream().anyMatch(ge -> ge instanceof Alvo || ge instanceof Teleporte);
+    }
 	
 
 	//Verifica se a posição do par tem algum elemento em cima, se tiver não d
@@ -39,10 +45,10 @@ public class Teleporte extends GameElement{
 	public boolean interact(GameElement other) {
 		List<GameElement> ge = GameEngine.getInstance().getGameElement(getPair().getPosition());
 		if(ge.size() > 1){
-			return true;
+			return false;
 		}
 		other.setPosition(getPair().getPosition());
-		return false;
+		return true;
 	} 
 
 

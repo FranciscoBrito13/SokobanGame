@@ -59,13 +59,12 @@ public class GameEngine implements Observer {
 			Direction d = Direction.directionFor(key);
 			Point2D nextP = bobcat.getPosition().plus(d.asVector());
 			List<GameElement> g = getGameElement(nextP);
+			g.sort((g1, g2) -> g1.getName().compareToIgnoreCase(g2.getName()));
 			boolean canMove = g.isEmpty() || g.stream().allMatch(ge -> ge.interact(bobcat));
 			if (canMove) {
 				bobcat.move(nextP);
 			}
-			//if(canMove)bobcat.move(nextP);
-			//interactWithObjects(key);
-			//if(canMove)bobcat.move(nextP);
+
 			bobcat.changeDirection(key);
 		}  
 

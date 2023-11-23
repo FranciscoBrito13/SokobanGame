@@ -31,33 +31,30 @@ public class Caixote extends GameElement implements Movable{
 	public void move(Point2D p) {
 		setPosition(p);
 	}
+	
+	
+	public boolean interact(GameElement other){
+		Point2D bobcatPosition = other.getPosition();
+		Point2D boxPosition = getPosition();
+		Vector2D moveVector = Vector2D.movementVector(bobcatPosition, boxPosition);
+		Point2D newBoxPoint = boxPosition.plus(moveVector);
+		
+		if(other instanceof Empilhadora){
+			boolean canMove = true;
+			List<GameElement> elements = GameEngine.getInstance().getGameElement(newBoxPoint);
+			for(GameElement g : elements){
+				canMove = canMove && g.interact(this);	
+				//if(initialPosition.equals(finalPosition)) return true;
 
-	public boolean isPositionValid(Point2D p) {
-		List<GameElement> elementsAtNewPosition = GameEngine.getInstance().getGameElement(p);
-		return elementsAtNewPosition == null || elementsAtNewPosition.isEmpty() ||
-				elementsAtNewPosition.stream().anyMatch(ge -> ge instanceof Alvo || ge instanceof Teleporte);
-	}
-	
-	
-	@Override
-	public boolean interact(GameElement other) {
-		Vector2D move = Vector2D.movementVector(other.getPosition(), getPosition());
-		Point2D p = getPosition().plus(move);
-		List<GameElement> g = GameEngine.getInstance().getGameElement(p);
-		if(isPositionValid(p)){
-			for (GameElement ge : g) {
-				if(ge instanceof Teleporte){
-					ge.interact(this);
-					return true;
-				}
 			}
-			move(p);
-			return true;
+			if(canMove)
+				move(newBoxPoint);
+			return canMove || boxPosition != getPosition();
 		}
 		return false;
-	
-
 	}
+	
+	
 
 
 

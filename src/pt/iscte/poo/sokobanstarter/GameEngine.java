@@ -55,6 +55,8 @@ public class GameEngine implements Observer {
 	public void update(Observed source) {
 		int key = gui.keyPressed();
 
+		
+		//Trata do movimento da empilhadora, dá interact com cada um dos objetos que está na posição seguinte
 		if(isArrows(key)) {
 			Direction d = Direction.directionFor(key);
 			Point2D nextP = bobcat.getPosition().plus(d.asVector());
@@ -67,29 +69,32 @@ public class GameEngine implements Observer {
 
 			bobcat.changeDirection(key);
 		}  
-
+		
+		//Se a empilhadora ficou sem bateria
 		if (isGameOver()) {
 			displayGameOverPanel();
 			level.restartLevel();
 		}
 
-
-		if(boxInPlace()){
+		//Se o nivel tiver sido completado
+		if(boxInPlace())
 			level.increaseLevel();
-		}
 
-
-		// O jogo é resetado ao carregar na tecla R
+		// O jogo é reiniciado ao carregar na tecla R
 		else if (key == KeyEvent.VK_R) {
 			level.restartLevel();
 
-
+		//Se possível é incrementado um nível do jogo
 		} else if(key == KeyEvent.VK_N){
 			level.increaseLevel();
 
+		//Se possível é decrementado um nível do jogo
 		}else if(key == KeyEvent.VK_B){
 			level.decreaseLevel();
 		}
+		
+
+
 
 		gui.setStatusMessage("Level: " + level.getLevel() + " Energy:" + bobcat.getBateria() + " Moves: " + bobcat.getMoves());
 		gui.update(); // Update the GUI after the movement

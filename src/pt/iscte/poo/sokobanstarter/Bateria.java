@@ -32,11 +32,15 @@ public class Bateria extends GameElement{
 	
 	@Override
 	public boolean interact(GameElement other) {
-		Empilhadora.getInstance(other.getPosition()).consumeBattery(this);
-		ImageMatrixGUI.getInstance().removeImage(this);
-		//GameEngine.getInstance().removeElement(getPosition());
-		ImageMatrixGUI.getInstance().addImage(new Chao(getPosition()));
-		return true;
+		if(other instanceof Empilhadora){
+			Empilhadora.getInstance(other.getPosition()).consumeBattery(this);
+			ImageMatrixGUI.getInstance().removeImage(this);
+			GameEngine.getInstance().removeElement(this);
+			ImageMatrixGUI.getInstance().addImage(new Chao(getPosition()));
+			return true;
+		} 
+		return false;
+		
 	}
 
 }

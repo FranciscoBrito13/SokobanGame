@@ -22,34 +22,44 @@ public class Teleporte extends GameElement{
 	}
 	
 	
-	public Teleporte getPair(){
-		GameEngine gEngine = GameEngine.getInstance();
-		List<Teleporte> teleportes = gEngine.getTeleportes();
-		for(Teleporte t : teleportes){
-			if(!(t.getPosition().equals(position))){
-				return t;
-			}
-		}
-		return null;
-	}	
-	
-    public boolean isPositionValid(Point2D p) {
-        List<GameElement> elementsAtNewPosition = GameEngine.getInstance().getGameElement(p);
-        return elementsAtNewPosition == null || elementsAtNewPosition.isEmpty() ||
-                elementsAtNewPosition.stream().anyMatch(ge -> ge instanceof Alvo || ge instanceof Teleporte);
-    }
-	
+	private Teleporte getPair() {
+	    GameEngine gEngine = GameEngine.getInstance();
+	    List<Teleporte> teleportes = gEngine.getTeleportes();
+	    
+	    for (Teleporte t : teleportes)
+	    	if (!t.getPosition().equals(position)) return t;
+	    return null;
+	}
 
-	//Verifica se a posição do par tem algum elemento em cima, se tiver não d
+	private boolean isPairFree() {
+	    Teleporte pair = getPair();
+	    
+	    if (pair != null) {
+	        List<GameElement> elementos = GameEngine.getInstance().getGameElement(pair.getPosition());
+	        return elementos.size() <= 1;
+	    }
+	    
+	    return false;
+	}
 	
-	public boolean interact(GameElement other) {
-		List<GameElement> ge = GameEngine.getInstance().getGameElement(getPair().getPosition());
-		if(ge.size() > 1){
+	private boolean isThisFree(){
+		List<GameElement> elementos = GameEngine.getInstance().getGameElement(getPosition());
+		if(elementos.size() > 1){
 			return false;
 		}
-		other.setPosition(getPair().getPosition());
 		return true;
-	} 
+	}
 
+	
+	@Override
+	public boolean interact(GameElement other){
+		//Point2D initialPosition = other.getPosition();
+		System.out.println(getPair().getPosition() + " " + isPairFree() + " " + other.getName());
+		if(isPairFree()){
+			other.move(getPair().getPosition());
+			return false;
+		}
+		return true;
+	}
 
 }

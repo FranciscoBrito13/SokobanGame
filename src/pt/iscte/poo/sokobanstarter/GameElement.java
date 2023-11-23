@@ -41,7 +41,9 @@ public abstract class GameElement implements ImageTile{
 		this.layer = x;
 	}
 	
-	public boolean interact(GameElement other) {return false;} ;
+	public boolean interact(GameElement other) {return false;}
+
+	public void move(Point2D position2){};
 	
 
 }

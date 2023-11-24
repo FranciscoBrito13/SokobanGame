@@ -1,8 +1,0 @@
-Username: francisco
-Level 1: 45 points
-Level 2: 77 points
-Level 3: 95 points
-Level 4: 277 points
-Level 5: 467 points
-Level 6: 554 points
-O jogador 'francisco' tem um total de 1515 pontos

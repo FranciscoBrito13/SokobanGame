@@ -8,7 +8,7 @@ import pt.iscte.poo.gui.ImageTile;
 public abstract class GameElement implements ImageTile{
 
 	private int priority = 0;
-	public Point2D position;
+	private Point2D position;
 	private String name;
 	private int layer;
 	

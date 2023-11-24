@@ -1,3 +1,15 @@
+//APENAS ALTERAR O SCORE SE O TOTAL FOR SUPERIOR AO ANTERIOR
+//ADICIONAR UM FICHEIRO COM HIGHSCORE
+//ADICIONAR UM FICHEIRO COM UTILIZADOR E PASSWORD PARA O LOGIN
+//
+//
+//
+//
+//
+//
+//
+
+
 package pt.iscte.poo.sokobanstarter;
 
 import java.awt.event.KeyEvent;
@@ -40,35 +52,35 @@ public class GameEngine implements Observer {
 		level.createGame(); 
 		bobcat = level.getBobcat();
 		gui.update();
-		gui.setStatusMessage("Nivel:" + level.getLevel() + " Bateria:" + bobcat.getBateria() + " NickName:" + user.getUsername());
+		gui.setStatusMessage("Nivel:" + level.getLevel() + " Bateria:" + bobcat.getBateria() + " NickName: " + user.getUsername());
 
 	}
-	
+
 	@Override
 	public void update(Observed source) {
 		int key = gui.keyPressed();
 
 		if (isArrows(key)) {
 			handleArrowMovement(key);
-			
+
 			if (isGameOver()) handleGameOver();
-			
+
 			if (boxInPlace()){
 				handleLevelCompletion();
 			}
-			
+
 		} else handleOtherKeys(key);
 
 
-		gui.setStatusMessage("Nivel:" + level.getLevel() + " Bateria:" + bobcat.getBateria() + " NickName:" + user.getUsername());
+		gui.setStatusMessage("Nivel:" + level.getLevel() + " Bateria:" + bobcat.getBateria() + " NickName: " + user.getUsername());
 		gui.update(); 
 	}
-	
+
 	//Verifica se o input dado são setas
 	private boolean isArrows(int key) {
 		return key == KeyEvent.VK_UP || key == KeyEvent.VK_DOWN || key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_LEFT;
 	}
-	
+
 	//Trata do movimento segundo as setas
 	private void handleArrowMovement(int key) {
 		Direction d = Direction.directionFor(key);
@@ -80,36 +92,49 @@ public class GameEngine implements Observer {
 		if (canMove) bobcat.move(nextP);
 		bobcat.changeDirection(key);
 	}
-	
+
 	//Mostra o display de GameOver e reinicia o nivel
 	private void handleGameOver() {
 		displayGameOverPanel();
 		level.restartLevel();
 	}
 
-	//Atualiza o scoreMap caso seja necessário
+	//trata da finalização de cada nível
 	private void handleLevelCompletion() {
-		user.setPointsForLevel(level.getLevel(), (int) ((bobcat.getMaxBattery() - bobcat.getMoves()) * (level.getLevel()* 1.10)));
+		user.setPointsForLevel(level.getLevel(), (int) (bobcat.getBateria() * (level.getLevel()* 1.10)));
 		if(level.getLevel() == 6){
-			user.writeScore();
-		}
+			if(user.getPreviousTopScore() < user.getTotalPoints()){
+				LeaderBoard.updateLeaderBoard(user.getUsername(),user.getTotalPoints());
+				user.writeScore();
+				gui.setMessage("Acabaste o jogo com um novo recorde!!");
+				level.resetGame();
+				return;
+			}
+			LeaderBoard.updateLeaderBoard(user.getUsername(),user.getTotalPoints());
+			gui.setMessage("Acabaste o jogo!!");
+			level.resetGame();
+			return;
+		} 
 		level.increaseLevel();
 	}
-	
+
 	//Verifica, caso nao seja dada um key de movimento, que operação deve ser executada
 	private void handleOtherKeys(int key) {
-		if(key == KeyEvent.VK_R)
+		if(key == KeyEvent.VK_R){
 			level.restartLevel();
+		} else if(key == KeyEvent.VK_N){
+			level.increaseLevel();
+		}
 	}
 
 	//Verifica se as caixas estão nos alvos
 	private boolean boxInPlace() {
-	    return level.getAlvos().stream().allMatch(alvo ->
-	            level.getTileMap().stream()
-	                    .filter(ge -> ge instanceof Caixote)
-	                    .map(ge -> (Caixote) ge)
-	                    .anyMatch(caixote -> caixote.getPosition().equals(alvo.getPosition()))
-	    );
+		return level.getAlvos().stream().allMatch(alvo ->
+		level.getTileMap().stream()
+		.filter(ge -> ge instanceof Caixote)
+		.map(ge -> (Caixote) ge)
+		.anyMatch(caixote -> caixote.getPosition().equals(alvo.getPosition()))
+				);
 	}
 
 
@@ -133,21 +158,21 @@ public class GameEngine implements Observer {
 		}
 		return elementsAtPoint;
 	}
-	
+
 	//Devolve o par de teleportes
 	public List<Teleporte> getTeleportes(){
 		return level.getTeleportes();
 	}
-	
-	
+
+
 	//Remove um GameElement da List de elementos
 	public void removeElement(GameElement p){
 		level.getTileMap().remove(p);
 	}
 	//setter do user
-    public void setCurrentUser(Utilizador user) {
-        this.user = user;
-    }
-	
+	public void setCurrentUser(Utilizador user) {
+		this.user = user;
+	}
+
 
 }

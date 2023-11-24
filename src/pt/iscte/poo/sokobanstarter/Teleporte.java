@@ -27,7 +27,7 @@ public class Teleporte extends GameElement{
 	    List<Teleporte> teleportes = gEngine.getTeleportes();
 	    
 	    for (Teleporte t : teleportes)
-	    	if (!t.getPosition().equals(position)) return t;
+	    	if (!t.getPosition().equals(getPosition())) return t;
 	    return null;
 	}
 

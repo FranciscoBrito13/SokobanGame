@@ -73,6 +73,10 @@ public class Empilhadora extends GameElement implements Movable {
         addBattery(b.getBattery());
     }
     
+    public int getMaxBattery(){
+    	return maxBattery;
+    }
+    
 
 	public int getMoves() {
 		return moves;

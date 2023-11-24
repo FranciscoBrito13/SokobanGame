@@ -10,9 +10,9 @@ import pt.iscte.poo.gui.ImageMatrixGUI;
 import pt.iscte.poo.gui.ImageTile;
 import pt.iscte.poo.utils.Point2D;
 
-public class Level {
+public class Nivel {
 
-	private int level = 0;
+	private int level = 1;
 	private int maxLevel = 6;
 	//private HashMap<Point2D, GameElement> tileMap;
 	private List<GameElement> tileMap;
@@ -21,7 +21,7 @@ public class Level {
 	List<Teleporte> teleportes;
 	private ImageMatrixGUI gui;
 
-	public Level(){
+	public Nivel(){
 		tileMap = new ArrayList<>();
 
 		gui = ImageMatrixGUI.getInstance();

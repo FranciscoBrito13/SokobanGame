@@ -10,6 +10,7 @@ public class Caixote extends GameElement implements Movable{
 
 	public Caixote(Point2D position){
 		super(position);
+		setPriority(1);
 	}
 
 	@Override
@@ -26,6 +27,7 @@ public class Caixote extends GameElement implements Movable{
 	public void setPosition(Point2D position) {
 		this.position = position;
 	}
+
 
 	@Override
 	public void move(Point2D p) {

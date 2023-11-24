@@ -42,19 +42,8 @@ public class Teleporte extends GameElement{
 	    return false;
 	}
 	
-	private boolean isThisFree(){
-		List<GameElement> elementos = GameEngine.getInstance().getGameElement(getPosition());
-		if(elementos.size() > 1){
-			return false;
-		}
-		return true;
-	}
-
-	
 	@Override
 	public boolean interact(GameElement other){
-		//Point2D initialPosition = other.getPosition();
-		System.out.println(getPair().getPosition() + " " + isPairFree() + " " + other.getName());
 		if(isPairFree()){
 			other.move(getPair().getPosition());
 			return false;

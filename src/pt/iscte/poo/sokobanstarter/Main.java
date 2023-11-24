@@ -1,11 +1,9 @@
 package pt.iscte.poo.sokobanstarter;
 
-import pt.iscte.poo.gui.ImageMatrixGUI;
-
 public class Main {
 
     public static void main(String[] args) {
-        Utilizador user = login();
+        Utilizador user = HandleLogin.login();
         
         if (user == null) {
             System.out.println("Utilizador cancelou o Login");
@@ -17,15 +15,5 @@ public class Main {
         gameEngine.start();
     }
 
-    public static Utilizador login() {
-        String username = ImageMatrixGUI.getInstance().askUser("Username:");
-        String password = ImageMatrixGUI.getInstance().askUser("Password:");
 
-        // Check if the user pressed Cancel
-        if (username == null || password == null) {
-            return null;
-        }
-
-        return new Utilizador(username, password);
-    }
 }

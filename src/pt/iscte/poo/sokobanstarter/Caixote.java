@@ -24,10 +24,6 @@ public class Caixote extends GameElement implements Movable{
 	}
 
 
-	public void setPosition(Point2D position) {
-		this.position = position;
-	}
-
 
 	@Override
 	public void move(Point2D p) {

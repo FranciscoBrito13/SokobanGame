@@ -145,6 +145,11 @@ public class Nivel {
 		bobcat.resetEmpilhadora();
 	}
 
+	public void resetGame() {
+		level = 1;
+		restartLevel();
+		gui.update();	
+	}
 
 	public List<GameElement> getTileMap() {
 		return tileMap;

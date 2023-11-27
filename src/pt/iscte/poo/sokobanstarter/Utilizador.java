@@ -34,6 +34,11 @@ public class Utilizador {
 	public HashMap<Integer, Integer> getLevelPoints() {
 		return levelPoints;
 	}
+	
+	public void resetPoints(){
+		totalPoints = 0;
+		levelPoints = new HashMap<>();
+	}
 
 	public int getPointsForLevel(int level) {
 		return levelPoints.getOrDefault(level, 0);

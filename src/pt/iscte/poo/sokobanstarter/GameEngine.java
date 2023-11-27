@@ -1,14 +1,5 @@
-//APENAS ALTERAR O SCORE SE O TOTAL FOR SUPERIOR AO ANTERIOR
-//ADICIONAR UM FICHEIRO COM HIGHSCORE
-//ADICIONAR UM FICHEIRO COM UTILIZADOR E PASSWORD PARA O LOGIN
-//
-//
-//
-//
-//
-//
-//
 
+//ADICIONAR UM FICHEIRO COM HIGHSCORE
 
 package pt.iscte.poo.sokobanstarter;
 
@@ -95,23 +86,26 @@ public class GameEngine implements Observer {
 
 	//Mostra o display de GameOver e reinicia o nivel
 	private void handleGameOver() {
-		displayGameOverPanel();
-		level.restartLevel();
+		gui.setMessage("A empilhadora ficou sem bateria, voltou ao início para recarregar :(");
+		user.resetPoints();
+		level.resetGame();
 	}
 
 	//trata da finalização de cada nível
 	private void handleLevelCompletion() {
-		user.setPointsForLevel(level.getLevel(), (int) (bobcat.getBateria() * (level.getLevel()* 1.10)));
+		user.setPointsForLevel(level.getLevel(), (int) (15 * Math.log(level.getLevel() + 1) * bobcat.getBateria()));
 		if(level.getLevel() == 6){
 			if(user.getPreviousTopScore() < user.getTotalPoints()){
 				LeaderBoard.updateLeaderBoard(user.getUsername(),user.getTotalPoints());
 				user.writeScore();
 				gui.setMessage("Acabaste o jogo com um novo recorde!!");
+				user.resetPoints();
 				level.resetGame();
 				return;
 			}
 			LeaderBoard.updateLeaderBoard(user.getUsername(),user.getTotalPoints());
 			gui.setMessage("Acabaste o jogo!!");
+			user.resetPoints();
 			level.resetGame();
 			return;
 		} 
@@ -136,13 +130,6 @@ public class GameEngine implements Observer {
 		.anyMatch(caixote -> caixote.getPosition().equals(alvo.getPosition()))
 				);
 	}
-
-
-	//Mostra um Display de GameOver
-	private void displayGameOverPanel() {
-		System.out.println("Ainda nao estou implementado");
-	}
-
 
 	//Verifica se a Empilhadora já não se pode mexer
 	public boolean isGameOver(){

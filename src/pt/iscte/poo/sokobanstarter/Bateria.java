@@ -9,15 +9,8 @@ public class Bateria extends GameElement{
 
 	public Bateria(Point2D position) {
 		super(position);
+		setName("Bateria");
 	}
-
-
-	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return "Bateria";
-	}
-
 
 	@Override
 	public int getLayer() {

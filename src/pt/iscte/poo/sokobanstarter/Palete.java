@@ -5,32 +5,25 @@ import java.util.List;
 import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
 
-public class Caixote extends GameElement implements Movable{
+public class Palete extends GameElement {
 
-
-	public Caixote(Point2D position){
+	public Palete(Point2D position) {
 		super(position);
-		setPriority(1);
-		setName("Caixote");
+		setName("Palete");
 	}
-
-//	@Override
-//	public String getName() {
-//		return "Caixote";
-//	}
+	
 
 	@Override
 	public int getLayer() {
 		return 2;
 	}
-
-
+	
 	@Override
 	public void move(Point2D p) {
 		setPosition(p);
 	}
 	
-	
+	//É preciso mudar isto tudo ainda!!
 	public boolean interact(GameElement other){
 		Point2D bobcatPosition = other.getPosition();
 		Point2D boxPosition = getPosition();
@@ -40,7 +33,6 @@ public class Caixote extends GameElement implements Movable{
 		if(other instanceof Empilhadora){
 			boolean canMove = true;
 			List<GameElement> elements = GameEngine.getInstance().getGameElement(newBoxPoint);
-			elements.sort((g1, g2) -> g2.getPriority() - g1.getPriority());
 			for(GameElement g : elements){
 				canMove = canMove && g.interact(this);	
 				//if(initialPosition.equals(finalPosition)) return true;
@@ -52,10 +44,6 @@ public class Caixote extends GameElement implements Movable{
 		}
 		return false;
 	}
-	
-	
-
-
 
 
 }

@@ -7,12 +7,9 @@ public class Alvo extends GameElement{
 
 	public Alvo(Point2D position) {
 		super(position);
+		setName("Alvo2");
 	}
 	
-	@Override
-	public String getName(){
-		return "Alvo2"; 
-	}
 	
 	@Override
 	public int getLayer(){

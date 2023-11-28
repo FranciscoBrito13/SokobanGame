@@ -19,6 +19,8 @@ public class Nivel {
 	private Empilhadora bobcat;
 	List<Alvo> alvos;
 	List<Teleporte> teleportes;
+	List<Buraco> buracos;
+	List<Caixote> caixotes;
 	private ImageMatrixGUI gui;
 
 	public Nivel(){
@@ -78,6 +80,18 @@ public class Nivel {
 						Teleporte t = new Teleporte(ponto);
 						tileMap.add(t);
 						tileList.add(t);
+						break;
+					case 'O':
+						Buraco buraco = new Buraco(ponto);
+						tileMap.add(buraco);
+						tileList.add(buraco);
+						break;
+					case 'P':
+						Palete p = new Palete(ponto);
+						tileMap.add(p);
+						tileList.add(p);
+						tileList.add(new Chao(ponto));
+						break;
 					default:
 						tileList.add(new Chao(ponto));
 						break;
@@ -88,10 +102,22 @@ public class Nivel {
 			}
 			alvos = loadAlvos();
 			teleportes = loadTeleportes();
+			buracos = loadBuracos();
+			caixotes = loadCaixotes();
 			gui.addImages(tileList);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private List<Caixote> loadCaixotes() {
+		caixotes = new ArrayList<>();
+		for (GameElement ge : tileMap) {
+			if (ge instanceof Caixote) {
+				caixotes.add((Caixote) ge);
+			}
+		}
+		return caixotes;
 	}
 
 	private List<Alvo> loadAlvos() {
@@ -112,6 +138,23 @@ public class Nivel {
 			}
 		}
 		return teleportes;
+	}
+	
+	private List<Buraco> loadBuracos(){
+		buracos = new ArrayList<>();
+		for (GameElement ge : tileMap) {
+			if (ge instanceof Buraco) {
+				buracos.add((Buraco) ge);
+			}
+		}
+		return buracos;
+	}
+	
+	public void updateLists(){
+		alvos = loadAlvos();
+		buracos = loadBuracos();
+		teleportes = loadTeleportes();
+		caixotes = loadCaixotes();
 	}
 
 
@@ -137,6 +180,8 @@ public class Nivel {
 			System.out.println("Este é o nível mais alto");
 		}
 	}
+	
+
 
 	public void restartLevel() {
 		tileMap.clear();
@@ -159,7 +204,6 @@ public class Nivel {
 		return gui;
 	}
 
-
 	public List<Alvo> getAlvos(){
 		return alvos;
 	}
@@ -169,6 +213,9 @@ public class Nivel {
 
 	public List<Teleporte> getTeleportes(){
 		return teleportes;
+	}
+	public List<Caixote> getCaixotes(){
+		return caixotes;
 	}
 
 

@@ -38,12 +38,17 @@ public class GameEngine implements Observer {
 			return INSTANCE = new GameEngine();
 		return INSTANCE;
 	}
+	
+	public void resetGameInstance(){
+		INSTANCE = null;
+		start();
+	}
 
 	public void start(){
 		level.createGame(); 
 		bobcat = level.getBobcat();
 		gui.update();
-		gui.setStatusMessage("Nivel:" + level.getLevel() + " Bateria:" + bobcat.getBateria() + " NickName: " + user.getUsername());
+		gui.setStatusMessage("NickName: " + user.getUsername() +  " Nivel:" + level.getLevel() + " Bateria:" + bobcat.getBateria());
 
 	}
 
@@ -63,7 +68,7 @@ public class GameEngine implements Observer {
 		} else handleOtherKeys(key);
 
 
-		gui.setStatusMessage("Nivel:" + level.getLevel() + " Bateria:" + bobcat.getBateria() + " NickName: " + user.getUsername());
+		gui.setStatusMessage("NickName: '" + user.getUsername() + "'" +  " Nivel:" + level.getLevel() + " Bateria:" + bobcat.getBateria());
 		gui.update(); 
 	}
 
@@ -85,10 +90,23 @@ public class GameEngine implements Observer {
 	}
 
 	//Mostra o display de GameOver e reinicia o nivel
-	private void handleGameOver() {
-		gui.setMessage("A empilhadora ficou sem bateria, voltou ao início para recarregar :(");
+	public void handleGameOver() {
 		user.resetPoints();
 		level.resetGame();
+	}
+	
+	//Verifica se a Empilhadora ficou sem bateria ou o jogo tem menos caixotes que alvos
+	private boolean isGameOver(){
+		if(bobcat.getBateria() <= 0){
+			gui.setMessage("A empilhadora ficou sem bateria, voltou ao início para recarregar :(");
+			return true;
+		}
+		if(level.getCaixotes().size() < level.getAlvos().size()){
+			gui.setMessage("Destruiste caixotes a mais, a emplhadora teve que voltar ao início para ir buscar mais");
+			return true;
+		};
+		
+		return false;
 	}
 
 	//trata da finalização de cada nível
@@ -121,29 +139,23 @@ public class GameEngine implements Observer {
 		}
 	}
 
-	//Verifica se as caixas estão nos alvos
+	//Verifica se as caixas estão nos alvos usando uma expressão lambda para transformar os alvos numa stream
+	//verifica então se todos os elementos têm um caixote na mesma posição
 	private boolean boxInPlace() {
-		return level.getAlvos().stream().allMatch(alvo ->
-		level.getTileMap().stream()
-		.filter(ge -> ge instanceof Caixote)
-		.map(ge -> (Caixote) ge)
-		.anyMatch(caixote -> caixote.getPosition().equals(alvo.getPosition()))
-				);
+	    return level.getAlvos().stream()
+	            .allMatch(alvo -> level.getTileMap().stream()
+	                    .filter(ge -> ge instanceof Caixote)
+	                    .map(ge -> (Caixote) ge)
+	                    .anyMatch(caixote -> caixote.getPosition().equals(alvo.getPosition())));
 	}
+	
 
-	//Verifica se a Empilhadora já não se pode mexer
-	public boolean isGameOver(){
-		return bobcat.getBateria() <= 0;
-	}
 
 	//Devolve todos os GameElements numa dada posição
 	public List<GameElement> getGameElement(Point2D p) {
-		List<GameElement> elementsAtPoint = new ArrayList<>();
-		for(GameElement gameElement : level.getTileMap()){
-			if(gameElement.getPosition().equals(p))
-				elementsAtPoint.add(gameElement);
-		}
-		return elementsAtPoint;
+	    List<GameElement> elementsAtPoint = new ArrayList<>(level.getTileMap());
+	    elementsAtPoint.removeIf(gameElement -> !gameElement.getPosition().equals(p));
+	    return elementsAtPoint;
 	}
 
 	//Devolve o par de teleportes
@@ -155,11 +167,16 @@ public class GameEngine implements Observer {
 	//Remove um GameElement da List de elementos
 	public void removeElement(GameElement p){
 		level.getTileMap().remove(p);
+		level.updateLists();
 	}
+
 	//setter do user
 	public void setCurrentUser(Utilizador user) {
 		this.user = user;
 	}
 
+	public ImageMatrixGUI getGui(){
+		return gui;
+	}
 
 }

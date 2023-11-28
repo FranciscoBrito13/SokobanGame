@@ -6,13 +6,7 @@ public class Vazio extends GameElement {
 
 	public Vazio(Point2D position) {
 		super(position);
-		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return "Vazio";
+		setName("Vazio");
 	}
 
 	@Override

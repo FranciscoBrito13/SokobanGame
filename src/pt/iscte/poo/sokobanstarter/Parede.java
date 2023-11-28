@@ -6,15 +6,8 @@ public class Parede extends GameElement {
 
 	public Parede(Point2D position) {
 		super(position);
-		// TODO Auto-generated constructor stub
+		setName("Parede");
 	}
-
-	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return "Parede";
-	}
-
 
 	@Override
 	public int getLayer() {

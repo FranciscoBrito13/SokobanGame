@@ -92,6 +92,17 @@ public class Nivel {
 						tileList.add(p);
 						tileList.add(new Chao(ponto));
 						break;
+					case 'M':
+						Martelo m = new Martelo(ponto);
+						tileMap.add(m);
+						tileList.add(m);
+						tileList.add(new Chao(ponto));
+						break;
+					case '%':
+						ParedeRachada paredeRachada = new ParedeRachada(ponto);
+						tileMap.add(paredeRachada);
+						tileList.add(paredeRachada);
+						tileList.add(new Chao(ponto));
 					default:
 						tileList.add(new Chao(ponto));
 						break;

@@ -35,7 +35,6 @@ public abstract class GameElement implements ImageTile{
 		this.name = name;
 	}
 	
-	//Define uma nova posi��o para um objeto
 	public void setPosition(Point2D position) {
 		this.position=position;
 	}

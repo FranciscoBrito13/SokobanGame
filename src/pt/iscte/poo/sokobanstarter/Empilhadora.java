@@ -5,12 +5,13 @@ import pt.iscte.poo.utils.Point2D;
 
 public class Empilhadora extends GameElement implements Movable {
 
-    private static Empilhadora INSTANCE; //Instancia da empilhadora
+    private static Empilhadora INSTANCE; 
     private String imageName = "Empilhadora_U";
     private Point2D initialPosition;
     private int moves;
     private int maxBattery = 100;
     private int curBattery;
+    private boolean hasHammer = false;
     
 
     private Empilhadora(Point2D position) {
@@ -46,6 +47,7 @@ public class Empilhadora extends GameElement implements Movable {
     	curBattery = maxBattery;
     	setPosition(initialPosition);
     	imageName = "Empilhadora_U";
+    	hasHammer = false;
     	moves = 0;
     }
     
@@ -99,5 +101,13 @@ public class Empilhadora extends GameElement implements Movable {
 	    //GameEngine.getInstance().relocateObject(oldPosition, p, this);
 	    decBateria();
         moves++;
+	}
+
+	public void pickHammer() {
+		hasHammer = true;
+	}
+
+	public boolean hasHammer() {
+		return hasHammer;
 	}
 }

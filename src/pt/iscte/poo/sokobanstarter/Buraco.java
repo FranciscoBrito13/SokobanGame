@@ -11,6 +11,8 @@ public class Buraco extends GameElement{
 		setPriority(1);
 		setName("Buraco");
 	}
+	
+	
 
 
 	@Override
@@ -31,7 +33,7 @@ public class Buraco extends GameElement{
 			return true;
 		}
 		if(other instanceof Palete){
-			setName("Teleporte"); // MUDAR PARA OUTRA COISA
+			setName("Buraco_Palete"); // MUDAR PARA OUTRA COISA
 			ImageMatrixGUI.getInstance().removeImage(other);
 			GameEngine.getInstance().removeElement(other);
 			GameEngine.getInstance().removeElement(this);

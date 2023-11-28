@@ -6,6 +6,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="/GraphPack_2023_2024_V1_1"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/GraphPack_2023_2024_V1_0"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

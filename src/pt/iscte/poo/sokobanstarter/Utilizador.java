@@ -75,7 +75,7 @@ public class Utilizador {
 	
 
 	public void writeScore() {
-		System.out.println("A escrever o score do user...");
+		System.out.println("Writing user' score... ");
 		String fileName = "score/" + username + "_score.txt";
 
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
@@ -87,7 +87,7 @@ public class Utilizador {
 				writer.write("Level " + level + ": " + points + " points\n");
 			}
 			writer.write("Total: " + totalPoints + " pontos");
-			System.out.println("Score guardado em " + fileName);
+			System.out.println("Score saved in " + fileName);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

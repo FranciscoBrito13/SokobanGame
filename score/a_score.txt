@@ -1,8 +1,8 @@
 Username: a
 Level 1: 530 points
-Level 2: 1351 points
-Level 3: 1663 points
-Level 4: 2027 points
-Level 5: 2472 points
-Level 6: 2714 points
-Total: 10757 pontos
+Level 2: 576 points
+Level 3: 519 points
+Level 4: 1520 points
+Level 5: 1854 points
+Level 6: 2772 points
+Total: 7771 pontos

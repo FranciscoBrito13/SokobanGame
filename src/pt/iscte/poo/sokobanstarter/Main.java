@@ -6,7 +6,7 @@ public class Main {
         Utilizador user = HandleLogin.login();
         
         if (user == null) {
-            System.out.println("Utilizador cancelou o Login");
+            System.out.println("User canceled Login");
             return;
         }
 

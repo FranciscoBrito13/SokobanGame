@@ -23,7 +23,7 @@ public class HandleLogin {
 				if(name.equals(userName.toLowerCase()) && password.equals(userPassword)) return true;
 			}
 		} catch (IOException e) {
-			System.out.println("A criar ficherio users.txt");
+			System.out.println("Creating users.txt file");
 		}
 
 		return false;
@@ -38,7 +38,7 @@ public class HandleLogin {
 			writer.write(userName.toLowerCase() + ":" + userPassword + System.lineSeparator());
 
 			writer.close();
-			System.out.println("Utilizador adicionado a: " + fileName);
+			System.out.println("User added to: " + fileName);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -56,7 +56,7 @@ public class HandleLogin {
 				if(name.equals(user.toLowerCase())) return true;
 			}
 		} catch (IOException e) {
-			System.out.println("A criar ficherio users.txt...");
+			System.out.println("Creating users.txt file...");
 		}
 
 		return false;
@@ -66,17 +66,17 @@ public class HandleLogin {
 		String userPassword = "";
 		String userName = ImageMatrixGUI.getInstance().askUser("Username:");
 
-		if(userName == null) throw new IllegalArgumentException("Cancelou o seu Login");
-		if(userName.contains(":")) throw new IllegalArgumentException("Nome não pode conter ':'");
+		if(userName == null) throw new IllegalArgumentException("You canceled your Login");
+		if(userName.contains(":")) throw new IllegalArgumentException("Name cannot contain ':'");
 
-		if(userName.length() == 0)throw new IllegalArgumentException("Utilizador não pode ser vazio");
+		if(userName.length() == 0)throw new IllegalArgumentException("User cannot be empty");
 
 		if(existsUser(userName)){
-			ImageMatrixGUI.getInstance().setMessage("Utilizador já existente, indique a password");
+			ImageMatrixGUI.getInstance().setMessage("Existing user, enter password");
 			while(userPassword.equals("")){
 				
 				userPassword = ImageMatrixGUI.getInstance().askUser("Password:");
-				if(userPassword == null) throw new IllegalArgumentException("Cancelou o seu Login");
+				if(userPassword == null) throw new IllegalArgumentException("You have canceled your Login");
 
 
 				if(correctPassword(userName, userPassword)){
@@ -85,11 +85,11 @@ public class HandleLogin {
 				} 
 				
 				userPassword = "";
-				ImageMatrixGUI.getInstance().setMessage("Password errada");
+				ImageMatrixGUI.getInstance().setMessage("Wrong Password");
 			}
 
 		} else {
-			ImageMatrixGUI.getInstance().setMessage("Novo utlizador, crie uma nova password!");
+			ImageMatrixGUI.getInstance().setMessage("New user, create a new password!");
 			userPassword = ImageMatrixGUI.getInstance().askUser("Password:");
 			createUser(userName, userPassword);
 			return new Utilizador(userName, userPassword);

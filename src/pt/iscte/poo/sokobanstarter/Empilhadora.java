@@ -20,9 +20,9 @@ public class Empilhadora extends GameElement implements Movable {
         curBattery = maxBattery;
     }
 
-    public static Empilhadora getInstance(Point2D initialPosition) {
+    public static Empilhadora getInstance() {
         if (INSTANCE == null)
-            INSTANCE = new Empilhadora(initialPosition);
+            INSTANCE = new Empilhadora(new Point2D(0, 0));
         return INSTANCE;
     }
 
@@ -79,7 +79,6 @@ public class Empilhadora extends GameElement implements Movable {
     	return maxBattery;
     }
     
-
 	public int getMoves() {
 		return moves;
 	}
@@ -96,9 +95,7 @@ public class Empilhadora extends GameElement implements Movable {
 
 	@Override
 	public void move(Point2D p) {
-	    //Point2D oldPosition = getPosition();
 	    setPosition(p);
-	    //GameEngine.getInstance().relocateObject(oldPosition, p, this);
 	    decBateria();
         moves++;
 	}

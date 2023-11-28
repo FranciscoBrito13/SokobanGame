@@ -22,8 +22,6 @@ public class Palete extends GameElement {
 	public void move(Point2D p) {
 		setPosition(p);
 	}
-	
-	//É preciso mudar isto tudo ainda!!
 	public boolean interact(GameElement other){
 		Point2D bobcatPosition = other.getPosition();
 		Point2D boxPosition = getPosition();

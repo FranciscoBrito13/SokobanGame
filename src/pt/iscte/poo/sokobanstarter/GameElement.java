@@ -31,11 +31,15 @@ public abstract class GameElement implements ImageTile{
 		return layer;
 	}
 	
+	public void setName(String name){
+		this.name = name;
+	}
 	
 	//Define uma nova posi��o para um objeto
 	public void setPosition(Point2D position) {
 		this.position=position;
 	}
+
 	
 	public void setLayer(int x){
 		this.layer = x;

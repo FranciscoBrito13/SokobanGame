@@ -9,13 +9,9 @@ public class Teleporte extends GameElement{
 
 	public Teleporte(Point2D position) {
 		super(position);
+		setName("Teleporte");
 	}
 	
-	@Override
-	public String getName() {
-		return "Teleporte";
-	}
-
 	@Override
 	public int getLayer() {
 		return 1;

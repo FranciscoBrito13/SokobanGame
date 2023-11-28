@@ -5,21 +5,21 @@ import java.util.List;
 import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
 
-public class Caixote extends GameElement implements Movable{
+public class Explosivo extends GameElement implements Movable{
 
-
-	public Caixote(Point2D position){
+	public Explosivo(Point2D position) {
 		super(position);
+		setName("Explosivo");
 		setPriority(1);
-		setName("Caixote");
-	}
-
-	@Override
-	public int getLayer() {
-		return 2;
 	}
 	
-	public boolean interact(GameElement other){
+	@Override
+	public int getLayer() {
+		return 3;
+	}
+	
+	@Override
+	public boolean interact(GameElement other) {
 		Point2D otherPosition = other.getPosition();
 		Point2D initialPosition = getPosition();
 		Vector2D moveVector = Vector2D.movementVector(otherPosition, initialPosition);
@@ -39,10 +39,5 @@ public class Caixote extends GameElement implements Movable{
 		}
 		return false;
 	}
-	
-	
-
-
-
 
 }

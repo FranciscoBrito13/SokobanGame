@@ -32,8 +32,13 @@ public class Buraco extends GameElement{
 			ImageMatrixGUI.getInstance().removeImage(other);
 			return true;
 		}
+		if(other instanceof Explosivo){
+			GameEngine.getInstance().removeElement(other);
+			ImageMatrixGUI.getInstance().removeImage(other);
+			return true;
+		}
 		if(other instanceof Palete){
-			setName("Buraco_Palete"); // MUDAR PARA OUTRA COISA
+			setName("Buraco_Palete");
 			ImageMatrixGUI.getInstance().removeImage(other);
 			GameEngine.getInstance().removeElement(other);
 			GameEngine.getInstance().removeElement(this);

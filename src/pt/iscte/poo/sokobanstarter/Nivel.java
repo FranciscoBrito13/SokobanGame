@@ -13,7 +13,7 @@ import pt.iscte.poo.utils.Point2D;
 public class Nivel {
 
 	private int level = 1;
-	private int maxLevel = 6;
+	public static final int maxLevel = 7;
 	private List<GameElement> tileMap;
 	private Empilhadora bobcat;
 	List<Alvo> alvos;
@@ -103,6 +103,19 @@ public class Nivel {
 						tileMap.add(paredeRachada);
 						tileList.add(paredeRachada);
 						tileList.add(new Chao(ponto));
+						break;
+					case '&':
+						Explosivo e = new Explosivo(ponto);
+						tileMap.add(e);
+						tileList.add(e);
+						tileList.add(new Chao(ponto));
+						break;
+					case 'U':
+						PedraGrande pg = new PedraGrande(ponto);
+						tileMap.add(pg);
+						tileList.add(pg);
+						tileList.add(new Chao(ponto));
+						break;
 					default:
 						tileList.add(new Chao(ponto));
 						break;

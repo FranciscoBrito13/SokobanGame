@@ -41,7 +41,7 @@ public class Teleporte extends GameElement{
 	@Override
 	public boolean interact(GameElement other){
 		if(isPairFree()){
-			other.move(getPair().getPosition());
+			other.teleport(getPair().getPosition());
 			return false;
 		}
 		return true;

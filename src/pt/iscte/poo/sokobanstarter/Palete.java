@@ -5,7 +5,7 @@ import java.util.List;
 import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
 
-public class Palete extends GameElement {
+public class Palete extends GameElement implements Movable {
 
 	public Palete(Point2D position) {
 		super(position);
@@ -18,10 +18,6 @@ public class Palete extends GameElement {
 		return 2;
 	}
 	
-	@Override
-	public void move(Point2D p) {
-		setPosition(p);
-	}
 	public boolean interact(GameElement other){
 		Point2D bobcatPosition = other.getPosition();
 		Point2D boxPosition = getPosition();

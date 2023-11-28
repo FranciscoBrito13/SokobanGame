@@ -55,7 +55,7 @@ public class Utilizador {
 
 		try (Scanner scanner = new Scanner(new File(filePath))) {
 
-			for (int i = 0; i < 7 && scanner.hasNextLine(); i++) {
+			for (int i = 0; i < Nivel.maxLevel + 1 && scanner.hasNextLine(); i++) {
 				scanner.nextLine();
 			}
 

@@ -53,7 +53,10 @@ public abstract class GameElement implements ImageTile{
 	
 	public boolean interact(GameElement other) {return false;}
 
-	public void move(Point2D position){};
+	public void teleport(Point2D position) {
+		setPosition(position);
+		
+	}
 	
 
 }

@@ -112,7 +112,7 @@ public class GameEngine implements Observer {
 	/*[HANDLES THE LEVEL COMPLETION AND GAME COMPLETION]*/
 	private void handleLevelCompletion() {
 		user.setPointsForLevel(level.getLevel(), (int) (15 * Math.log(level.getLevel() + 1) * bobcat.getBateria()));
-		if(level.getLevel() == 6){
+		if(level.getLevel() == Nivel.maxLevel){
 			if(user.getPreviousTopScore() < user.getTotalPoints()){
 				LeaderBoard.updateLeaderBoard(user.getUsername(),user.getTotalPoints());
 				user.writeScore();

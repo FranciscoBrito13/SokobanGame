@@ -40,8 +40,8 @@ public abstract class GameElement implements ImageTile{
 	}
 
 	
-	public void setLayer(int x){
-		this.layer = x;
+	public void setLayer(int layer){
+		this.layer = layer;
 	}
     public void setPriority(int priority) {
         this.priority = priority;
@@ -53,7 +53,7 @@ public abstract class GameElement implements ImageTile{
 	
 	public boolean interact(GameElement other) {return false;}
 
-	public void move(Point2D position2){};
+	public void move(Point2D position){};
 	
 
 }

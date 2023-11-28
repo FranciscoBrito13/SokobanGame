@@ -14,11 +14,6 @@ public class Caixote extends GameElement implements Movable{
 		setName("Caixote");
 	}
 
-//	@Override
-//	public String getName() {
-//		return "Caixote";
-//	}
-
 	@Override
 	public int getLayer() {
 		return 2;
@@ -43,7 +38,6 @@ public class Caixote extends GameElement implements Movable{
 			elements.sort((g1, g2) -> g2.getPriority() - g1.getPriority());
 			for(GameElement g : elements){
 				canMove = canMove && g.interact(this);	
-				//if(initialPosition.equals(finalPosition)) return true;
 
 			}
 			if(canMove)

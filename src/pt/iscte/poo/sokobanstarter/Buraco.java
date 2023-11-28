@@ -24,7 +24,7 @@ public class Buraco extends GameElement{
 	public boolean interact(GameElement other){
 		if(other instanceof Empilhadora){
 			GameEngine.getInstance().handleGameOver();
-			ImageMatrixGUI.getInstance().setMessage("A empilhadora caiu no buraco e voltou para trás para ir à oficina");
+			ImageMatrixGUI.getInstance().setMessage("The bobcat fell into the hole and turned back to go to the workshop");
 			return false;
 		}
 		if(other instanceof Caixote){

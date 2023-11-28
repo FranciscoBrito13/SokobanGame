@@ -11,7 +11,7 @@ public class ParedeRachada extends GameElement{
 	}
 	@Override
 	public int getLayer(){
-		return 5;
+		return 4;
 	}
 	
 	@Override

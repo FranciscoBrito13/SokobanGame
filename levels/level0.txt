@@ -1,6 +1,6 @@
 =########=
-## C  CC## 
-# C   CC #
+##XC  CC## 
+# C C CC #
 #CC  CCC #
 #CC C C C#
 # C CC C #

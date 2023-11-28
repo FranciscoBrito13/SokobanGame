@@ -14,7 +14,6 @@ public class Nivel {
 
 	private int level = 1;
 	private int maxLevel = 6;
-	//private HashMap<Point2D, GameElement> tileMap;
 	private List<GameElement> tileMap;
 	private Empilhadora bobcat;
 	List<Alvo> alvos;
@@ -51,8 +50,9 @@ public class Nivel {
 						break;
 					case 'E':
 						tileList.add(new Chao(ponto));
-						bobcat = Empilhadora.getInstance(ponto);
+						bobcat = Empilhadora.getInstance();
 						bobcat.setInitialPosition(ponto);
+						bobcat.resetEmpilhadora();
 						tileMap.add(bobcat);
 						tileList.add(bobcat);
 						break;
@@ -172,27 +172,15 @@ public class Nivel {
 	public int getLevel() {
 		return level;
 	}
-	public void decreaseLevel() {
-		if(level - 1 >= 0){
-			level--;
-			restartLevel();
-			gui.update();
-		} else {
-			System.out.println("Este é o nível mais baixo");
-		}
-	}
 
 	public void increaseLevel() {
 		if(level < maxLevel){
 			level++;
 			restartLevel();
 			gui.update();
-		} else {
-			System.out.println("Este é o nível mais alto");
 		}
 	}
 	
-
 
 	public void restartLevel() {
 		tileMap.clear();

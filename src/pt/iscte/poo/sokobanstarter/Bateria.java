@@ -26,7 +26,7 @@ public class Bateria extends GameElement{
 	@Override
 	public boolean interact(GameElement other) {
 		if(other instanceof Empilhadora){
-			Empilhadora.getInstance(other.getPosition()).consumeBattery(this);
+			Empilhadora.getInstance().consumeBattery(this);
 			ImageMatrixGUI.getInstance().removeImage(this);
 			GameEngine.getInstance().removeElement(this);
 			ImageMatrixGUI.getInstance().addImage(new Chao(getPosition()));

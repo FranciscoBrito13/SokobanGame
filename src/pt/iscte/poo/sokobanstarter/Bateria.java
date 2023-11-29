@@ -5,24 +5,28 @@ import pt.iscte.poo.utils.Point2D;
 
 public class Bateria extends GameElement{
 	
+	/* [BATTERY AMMOUT] */
 	private int batteryAmount = 50;
 
+	/* [BATTERY CONSTRUCTOR] */
 	public Bateria(Point2D position) {
 		super(position);
 		setName("Bateria");
 	}
 
+	/* [LAYER GETTER] */
 	@Override
 	public int getLayer() {
-		// TODO Auto-generated method stub
 		return 1;
 	}
 	
+	/* [BATTERY AMOUNT GETTER] */
 	public int getBattery(){
 		return batteryAmount;
 
 	}
 	
+	/* [BATTERY INTERACT FUNCTION] */
 	@Override
 	public boolean interact(GameElement other) {
 		if(other instanceof Empilhadora){

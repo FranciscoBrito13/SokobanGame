@@ -5,15 +5,19 @@ import pt.iscte.poo.utils.Point2D;
 
 public class ParedeRachada extends GameElement{
 
+	/* [CRACKED WALL CONSTRUCTOR] */
 	public ParedeRachada(Point2D position) {
 		super(position);
 		setName("ParedeRachada");
 	}
+	
+	/* [LAYER GETTER] */
 	@Override
 	public int getLayer(){
 		return 4;
 	}
 	
+	/* [CRACKED WALL INTERACT FUNCTION] */
 	@Override
 	public boolean interact(GameElement other){
 		if(other instanceof Empilhadora){

@@ -9,9 +9,10 @@ import java.util.LinkedHashMap;
 import java.util.Scanner;
 
 public class LeaderBoard {
-	
+
+	/* [FUNCTION THAT RETURNS THE TOP SCORES] */
 	public static LinkedHashMap<String,Integer> getLeaderBoard(){
-		
+
 		LinkedHashMap<String, Integer> topScores = new LinkedHashMap<>();
 		String filePath = "score/top_score.txt";
 
@@ -20,83 +21,85 @@ public class LeaderBoard {
 				String line = scanner.nextLine();
 				topScores.put(line.split(":")[0],Integer.parseInt(line.split(":")[1]));
 			}
-				
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return topScores;
 	}
-	
+
+	/* [FUNCTION THAT SORTS THE LEADERBOARD] */
 	public static LinkedHashMap<String, Integer> sortByValueDescending(HashMap<String, Integer> unsorterBoard) {
-	    LinkedHashMap<String, Integer> sortedMap = unsorterBoard.entrySet()
-	            .stream()
-	            .sorted(HashMap.Entry.<String, Integer>comparingByValue().reversed())
-	            .collect(LinkedHashMap::new,
-	                    (map, entry) -> map.put(entry.getKey(), entry.getValue()),
-	                    LinkedHashMap::putAll);
+		LinkedHashMap<String, Integer> sortedMap = unsorterBoard.entrySet()
+				.stream()
+				.sorted(HashMap.Entry.<String, Integer>comparingByValue().reversed())
+				.collect(LinkedHashMap::new,
+						(map, entry) -> map.put(entry.getKey(), entry.getValue()),
+						LinkedHashMap::putAll);
 
-	    return sortedMap;
+		return sortedMap;
 	}
-	
-    public static boolean isInLeaderBoard(LinkedHashMap<String, Integer> topScores, int totalPoints) {
-        for (int value : topScores.values()) {
-            if (value < totalPoints) {
-                return true;
-            }
-        }
-        return false;
-    }
-    
-	
-	 //
-	 public static boolean updateLeaderBoard(String playerName, int totalPoints) {
-	        LinkedHashMap<String, Integer> topScores = getLeaderBoard();
 
-	        if (topScores.size() < 5 || isInLeaderBoard(topScores, totalPoints)) {
-	        	
-	            topScores.put(playerName, totalPoints);
+	/* [] */               ////////////////////////////
+	public static boolean isInLeaderBoard(LinkedHashMap<String, Integer> topScores, int totalPoints) {
+		for (int value : topScores.values()) {
+			if (value < totalPoints) {
+				return true;
+			}
+		}
+		return false;
+	}
 
-	            topScores = sortByValueDescending(topScores);
 
-	            topScores = keepTop5Entries(topScores);
+	/* [FUNCTION THAT UPDATES THE LEADERBOARD] */
+	public static boolean updateLeaderBoard(String playerName, int totalPoints) {
+		LinkedHashMap<String, Integer> topScores = getLeaderBoard();
 
-	            updateLeaderBoardFile(topScores);
+		if (topScores.size() < 5 || isInLeaderBoard(topScores, totalPoints)) {
 
-	            return true;
-	        }
+			topScores.put(playerName, totalPoints);
 
-	        return false;
-	    }
-	    
+			topScores = sortByValueDescending(topScores);
 
-	    private static LinkedHashMap<String, Integer> keepTop5Entries(HashMap<String, Integer> topScores) {
-	        int count = 0;
-	        LinkedHashMap<String, Integer> result = new LinkedHashMap<>();
+			topScores = keepTop5Entries(topScores);
 
-	        for (HashMap.Entry<String, Integer> entry : topScores.entrySet()) {
-	            if (count >= 5) {
-	                break;
-	            }
+			updateLeaderBoardFile(topScores);
 
-	            result.put(entry.getKey(), entry.getValue());
-	            count++;
-	        }
+			return true;
+		}
 
-	        return result;
-	    }
-	    
-	    
-	    private static void updateLeaderBoardFile(HashMap<String, Integer> topScores) {
-	        String filePath = "score/top_score.txt";
+		return false;
+	}
 
-	        try (PrintWriter writer = new PrintWriter(new FileWriter(filePath))) {
-	            topScores.entrySet()
-	                    .stream()
-	                    .forEach(entry -> writer.println(entry.getKey() + ":" + entry.getValue()));
-	            writer.close();
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-	    }
+	/* [] */                               /////////
+	private static LinkedHashMap<String, Integer> keepTop5Entries(HashMap<String, Integer> topScores) {
+		int count = 0;
+		LinkedHashMap<String, Integer> result = new LinkedHashMap<>();
+
+		for (HashMap.Entry<String, Integer> entry : topScores.entrySet()) {
+			if (count >= 5) {
+				break;
+			}
+
+			result.put(entry.getKey(), entry.getValue());
+			count++;
+		}
+
+		return result;
+	}
+
+	/* [FUNCTION THAT UPDATES THE LEADERBOARD FILE] */
+	private static void updateLeaderBoardFile(HashMap<String, Integer> topScores) {
+		String filePath = "score/top_score.txt";
+
+		try (PrintWriter writer = new PrintWriter(new FileWriter(filePath))) {
+			topScores.entrySet()
+			.stream()
+			.forEach(entry -> writer.println(entry.getKey() + ":" + entry.getValue()));
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 }

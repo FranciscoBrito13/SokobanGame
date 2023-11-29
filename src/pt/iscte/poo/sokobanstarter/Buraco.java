@@ -5,21 +5,20 @@ import pt.iscte.poo.utils.Point2D;
 
 public class Buraco extends GameElement{
 
-
+	/* [HOLE CONSTRUCTOR] */
 	public Buraco(Point2D position) {
 		super(position);
 		setPriority(1);
 		setName("Buraco");
 	}
 	
-	
-
-
+	/* [LAYER GETTER] */
 	@Override
 	public int getLayer() {
 		return 1;
 	}
 
+	/* [HOLE INTERACT FUNCTION] */
 	@Override
 	public boolean interact(GameElement other){
 		if(other instanceof Empilhadora){

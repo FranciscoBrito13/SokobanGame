@@ -8,47 +8,58 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Utilizador {
+	
+	/* [USER VARIABLES] */
 	private String username;
 	private String password;
 	private HashMap<Integer, Integer> levelPoints;
 	private int totalPoints = 0;
 
+	/* [USER CONSTRUCTOR] */
 	public Utilizador(String username, String password) {
 		this.username = username;
 		this.password = password;
 		this.levelPoints = new HashMap<>();
 	}
 	
+	/* [TOTAL POINTS GETTER] */
 	public int getTotalPoints(){
 		return totalPoints;
 	}
 
+	/* [USERNAME GETTER] */
 	public String getUsername() {
 		return username;
 	}
 
+	/* [PASSWORD GETTER] */
 	public String getPassword() {
 		return password;
 	}
 
+	/* [LEVELPOINTS GETTER] */
 	public HashMap<Integer, Integer> getLevelPoints() {
 		return levelPoints;
 	}
 	
+	/* [FUNCTION THAT RESETS POINTS] */
 	public void resetPoints(){
 		totalPoints = 0;
 		levelPoints = new HashMap<>();
 	}
 
+	/* [FUNCTION THAT RETURNS THE POINTS OF A GIVEN LEVEL] */
 	public int getPointsForLevel(int level) {
 		return levelPoints.getOrDefault(level, 0);
 	}
 
+	/* [FUNCTION THAT SETS THE POINTS FOR THE GIVEN LEVEL] */
 	public void setPointsForLevel(int level, int points) {
 		levelPoints.put(level, points);
 		totalPoints += points;
 	}
 
+	/* [FUNCTION THAT RETURNS THE PREVIOUS TOP SCORE] */
 	public int getPreviousTopScore() {
 		
 		String filePath = "score/" + username + "_score.txt";
@@ -73,7 +84,7 @@ public class Utilizador {
 		return 0;
 	}
 	
-
+	/* [FUNCTION THAT WRITES THE SCORES IN THE USER'S SCORE FILE] */
 	public void writeScore() {
 		System.out.println("Writing user' score... ");
 		String fileName = "score/" + username + "_score.txt";

@@ -10,6 +10,7 @@ import pt.iscte.poo.gui.ImageMatrixGUI;
 
 public class HandleLogin {
 
+	/* [FUNCTION THAT CHECKS IF THE PASSWORD IS CORRECT] */
 	public static boolean correctPassword(String userName, String userPassword) {
 		String folderPath = "users/";
 		String fileName = folderPath + "users";
@@ -29,6 +30,7 @@ public class HandleLogin {
 		return false;
 	}
 
+	/* [FUNCTION THAT CREATES AN USER AND ADDS IT TO USERS FILE] */
 	public static void createUser(String userName, String userPassword) {
 		String folderPath = "users/";
 		String fileName = folderPath + "users.txt";
@@ -44,6 +46,7 @@ public class HandleLogin {
 		}
 	}
 
+	/* [CHECKS IF AN USER EXISTS ON THE USERS FILE] */
 	public static boolean existsUser(String user) {
 		String folderPath = "users/";
 		String fileName = folderPath + "users";
@@ -62,6 +65,7 @@ public class HandleLogin {
 		return false;
 	}
 
+	/* [LOGIN FUNCTION] */
 	public static Utilizador login() {
 		String userPassword = "";
 		String userName = ImageMatrixGUI.getInstance().askUser("Username:");

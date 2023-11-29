@@ -7,17 +7,19 @@ import pt.iscte.poo.utils.Point2D;
 
 public class Teleporte extends GameElement{
 
+	/* [TELEPORT CONSTRUCTOR] */
 	public Teleporte(Point2D position) {
 		super(position);
 		setName("Teleporte");
 	}
 	
+	/* [LAYER GETTER] */
 	@Override
 	public int getLayer() {
 		return 1;
 	}
 	
-	
+	/* [TELEPORT'S PAIR GETTER] */
 	private Teleporte getPair() {
 	    GameEngine gEngine = GameEngine.getInstance();
 	    List<Teleporte> teleportes = gEngine.getTeleportes();
@@ -27,6 +29,7 @@ public class Teleporte extends GameElement{
 	    return null;
 	}
 
+	/* [FUNCTION THAT CHECKS IF THE TELEPORT HAS SOMETHING ABOVE IT] */
 	private boolean isPairFree() {
 	    Teleporte pair = getPair();
 	    
@@ -38,6 +41,7 @@ public class Teleporte extends GameElement{
 	    return false;
 	}
 	
+	/* [TELEPORT INTERACT FUNCTION] */
 	@Override
 	public boolean interact(GameElement other){
 		if(isPairFree()){

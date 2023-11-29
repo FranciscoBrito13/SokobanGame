@@ -7,17 +7,20 @@ import pt.iscte.poo.utils.Vector2D;
 
 public class Explosivo extends GameElement implements Movable{
 
+	/* [EXPLOSIVE CONSTRUCTOR] */
 	public Explosivo(Point2D position) {
 		super(position);
 		setName("Explosivo");
 		setPriority(1);
 	}
 	
+	/* [LAYER GETTER] */
 	@Override
 	public int getLayer() {
 		return 3;
 	}
 	
+	/* [EXPLOSIVE INTERACT FUNCTION] */
 	@Override
 	public boolean interact(GameElement other) {
 		Point2D otherPosition = other.getPosition();

@@ -12,16 +12,22 @@ import pt.iscte.poo.utils.Point2D;
 
 public class Nivel {
 
+	/* [LEVEL VARIABLES] */
 	private int level = 1;
 	public static final int maxLevel = 7;
+	/* [TILEMAP/BOBCAT] */
 	private List<GameElement> tileMap;
 	private Empilhadora bobcat;
+	/* [GAME ELEMENT LISTS] */
 	List<Alvo> alvos;
 	List<Teleporte> teleportes;
 	List<Buraco> buracos;
 	List<Caixote> caixotes;
+	/* [GUI] */
 	private ImageMatrixGUI gui;
 
+	
+	/* [LEVEL CONSTRUCTOR] */
 	public Nivel(){
 		tileMap = new ArrayList<>();
 
@@ -29,6 +35,8 @@ public class Nivel {
 		gui.setSize(GameEngine.GRID_HEIGHT, GameEngine.GRID_WIDTH);
 	}
 
+	
+	/* [FUNCTION THAT CREATES THE GAME BY READING THE LEVEL FILES] */
 	public void createGame() {
 
 		try {
@@ -134,6 +142,7 @@ public class Nivel {
 		}
 	}
 
+	/* [FUNCTION THAT LOADS THE BOXES] */
 	private List<Caixote> loadCaixotes() {
 		caixotes = new ArrayList<>();
 		for (GameElement ge : tileMap) {
@@ -144,6 +153,7 @@ public class Nivel {
 		return caixotes;
 	}
 
+	/* [FUNCTION THAT LOADS THE TARGETS] */
 	private List<Alvo> loadAlvos() {
 		alvos = new ArrayList<>();
 		for (GameElement ge : tileMap) {
@@ -154,6 +164,7 @@ public class Nivel {
 		return alvos;
 	}
 
+	/* [FUNCTION THAT LOADS THE TELEPORTERS] */
 	private List<Teleporte> loadTeleportes() {
 		teleportes = new ArrayList<>();
 		for (GameElement ge : tileMap) {
@@ -164,6 +175,7 @@ public class Nivel {
 		return teleportes;
 	}
 	
+	/* [FUNCTION THAT LOADS THE HOLES] */
 	private List<Buraco> loadBuracos(){
 		buracos = new ArrayList<>();
 		for (GameElement ge : tileMap) {
@@ -174,6 +186,7 @@ public class Nivel {
 		return buracos;
 	}
 	
+	/* [FUNCTION THAT UPDATES ALL GAME ELEMENT LISTS] */
 	public void updateLists(){
 		alvos = loadAlvos();
 		buracos = loadBuracos();
@@ -181,11 +194,12 @@ public class Nivel {
 		caixotes = loadCaixotes();
 	}
 
-
+	/* [LEVEL GETTER] */
 	public int getLevel() {
 		return level;
 	}
 
+	/* [FUNCTION THAT INCREASES THE LEVEL] */
 	public void increaseLevel() {
 		if(level < maxLevel){
 			level++;
@@ -194,7 +208,7 @@ public class Nivel {
 		}
 	}
 	
-
+	/* [FUNCTION THAT RESETS THE LEVEL] */
 	public void restartLevel() {
 		tileMap.clear();
 		gui.clearImages();
@@ -202,30 +216,39 @@ public class Nivel {
 		bobcat.resetEmpilhadora();
 	}
 
+	/* [FUNCTION THAT RESETS THE GAME] */
 	public void resetGame() {
 		level = 1;
 		restartLevel();
 		gui.update();	
 	}
 
+	/* [TILEMAP GETTER] */
 	public List<GameElement> getTileMap() {
 		return tileMap;
 	}
 
+	/* [GUI GETTER] */
 	public ImageMatrixGUI getGui() {
 		return gui;
 	}
 
+	/* [LIST OF TARGETS GETTER] */
 	public List<Alvo> getAlvos(){
 		return alvos;
 	}
+	
+	/* [BOBCAT GETTER] */
 	public Empilhadora getBobcat() {
 		return bobcat;
 	}
 
+	/* [LIST OF TELEPORTER GETTER] */
 	public List<Teleporte> getTeleportes(){
 		return teleportes;
 	}
+	
+	/* [LIST OF BOXES GETTER] */
 	public List<Caixote> getCaixotes(){
 		return caixotes;
 	}

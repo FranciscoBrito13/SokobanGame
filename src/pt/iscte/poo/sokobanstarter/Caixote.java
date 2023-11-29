@@ -7,18 +7,21 @@ import pt.iscte.poo.utils.Vector2D;
 
 public class Caixote extends GameElement implements Movable{
 
-
+	/* [BOX CONSTRUCTOR] */
 	public Caixote(Point2D position){
 		super(position);
 		setPriority(1);
 		setName("Caixote");
 	}
-
+	
+	/* [LAYER GETTER] */
 	@Override
 	public int getLayer() {
 		return 2;
 	}
 	
+	/* [BOX INTERACT FUNCTION] */
+	@Override
 	public boolean interact(GameElement other){
 		Point2D otherPosition = other.getPosition();
 		Point2D initialPosition = getPosition();

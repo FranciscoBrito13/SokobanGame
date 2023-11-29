@@ -7,17 +7,19 @@ import pt.iscte.poo.utils.Vector2D;
 
 public class Palete extends GameElement implements Movable {
 
+	/* [PALLET CONSTRUCTOR] */
 	public Palete(Point2D position) {
 		super(position);
 		setName("Palete");
 	}
 	
-
+	/* [LAYER GETTER] */
 	@Override
 	public int getLayer() {
 		return 2;
 	}
 	
+	/* [PALLET INTERACT FUNCTION] */
 	public boolean interact(GameElement other){
 		Point2D bobcatPosition = other.getPosition();
 		Point2D boxPosition = getPosition();

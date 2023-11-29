@@ -30,7 +30,7 @@ public class HandleLogin {
 		return false;
 	}
 
-	/* [FUNCTION THAT CREATES AN USER AND ADDS IT TO USERS FILE] */
+	/* [FUNCTION THAT CREATES AN USER AND ADDS IT TO users/users.txt FILE] */
 	public static void createUser(String userName, String userPassword) {
 		String folderPath = "users/";
 		String fileName = folderPath + "users.txt";

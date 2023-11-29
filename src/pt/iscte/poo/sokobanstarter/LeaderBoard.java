@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class LeaderBoard {
 
-	/* [FUNCTION THAT RETURNS THE TOP SCORES] */
+	/*[FUNCTION THAT RETURNS THE PREVIOUS TOP SCORES IN A LINKEDHASHMAP]*/
 	public static LinkedHashMap<String,Integer> getLeaderBoard(){
 
 		LinkedHashMap<String, Integer> topScores = new LinkedHashMap<>();
@@ -28,7 +28,7 @@ public class LeaderBoard {
 		return topScores;
 	}
 
-	/* [FUNCTION THAT SORTS THE LEADERBOARD] */
+	/*[FUNCTION THAT SORTS A GIVEN LINKEDHASHMAP BY ITS KEYS VALUES VALUE]*/
 	public static LinkedHashMap<String, Integer> sortByValueDescending(HashMap<String, Integer> unsorterBoard) {
 		LinkedHashMap<String, Integer> sortedMap = unsorterBoard.entrySet()
 				.stream()
@@ -40,7 +40,7 @@ public class LeaderBoard {
 		return sortedMap;
 	}
 
-	/* [] */               ////////////////////////////
+	/* [CHECKS IF A GIVEN SCORE IS IN THE RANGE OF VALUES FOR THE TOPSCORE] */ 
 	public static boolean isInLeaderBoard(LinkedHashMap<String, Integer> topScores, int totalPoints) {
 		for (int value : topScores.values()) {
 			if (value < totalPoints) {
@@ -51,7 +51,7 @@ public class LeaderBoard {
 	}
 
 
-	/* [FUNCTION THAT UPDATES THE LEADERBOARD] */
+	/* [FUNCTION THAT UPDATES THE LEADERBOARD LINKEDHASHMAP] */
 	public static boolean updateLeaderBoard(String playerName, int totalPoints) {
 		LinkedHashMap<String, Integer> topScores = getLeaderBoard();
 
@@ -71,7 +71,7 @@ public class LeaderBoard {
 		return false;
 	}
 
-	/* [] */                               /////////
+	/*[FUNCION THAT KEEPS THE FIRST 5 KEYS OF A LINKEDHASHMAP, REMOVING THE OTHERS]*/
 	private static LinkedHashMap<String, Integer> keepTop5Entries(HashMap<String, Integer> topScores) {
 		int count = 0;
 		LinkedHashMap<String, Integer> result = new LinkedHashMap<>();
@@ -90,7 +90,7 @@ public class LeaderBoard {
 
 	/* [FUNCTION THAT UPDATES THE LEADERBOARD FILE] */
 	private static void updateLeaderBoardFile(HashMap<String, Integer> topScores) {
-		String filePath = "score/top_score.txt";
+		String filePath = "score/top_scores.txt";
 
 		try (PrintWriter writer = new PrintWriter(new FileWriter(filePath))) {
 			topScores.entrySet()

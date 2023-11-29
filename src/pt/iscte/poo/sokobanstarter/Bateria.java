@@ -5,10 +5,10 @@ import pt.iscte.poo.utils.Point2D;
 
 public class Bateria extends GameElement{
 	
-	/* [BATTERY AMMOUT] */
+	/*[BATTERY AMMOUT]*/
 	private int batteryAmount = 50;
 
-	/* [BATTERY CONSTRUCTOR] */
+	/*[BATTERY CONSTRUCTOR]*/
 	public Bateria(Point2D position) {
 		super(position);
 		setName("Bateria");

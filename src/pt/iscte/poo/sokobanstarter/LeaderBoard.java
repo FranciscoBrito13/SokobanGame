@@ -9,17 +9,20 @@ import java.util.LinkedHashMap;
 import java.util.Scanner;
 
 public class LeaderBoard {
+	
+	
+	private static final String SCORE_PATH = "score/top_scores.txt";
 
 	/*[FUNCTION THAT RETURNS THE PREVIOUS TOP SCORES IN A LINKEDHASHMAP]*/
 	public static LinkedHashMap<String,Integer> getLeaderBoard(){
 
 		LinkedHashMap<String, Integer> topScores = new LinkedHashMap<>();
-		String filePath = "score/top_score.txt";
+		//String filePath = "score/top_scores.txt";
 
-		try (Scanner scanner = new Scanner(new File(filePath))) {
+		try (Scanner scanner = new Scanner(new File(SCORE_PATH))) {
 			while(scanner.hasNextLine()){
 				String line = scanner.nextLine();
-				topScores.put(line.split(":")[0],Integer.parseInt(line.split(":")[1]));
+				topScores.put(line.split(":")[0].toLowerCase(),Integer.parseInt(line.split(":")[1]));
 			}
 
 		} catch (IOException e) {
@@ -57,7 +60,7 @@ public class LeaderBoard {
 
 		if (topScores.size() < 5 || isInLeaderBoard(topScores, totalPoints)) {
 
-			topScores.put(playerName, totalPoints);
+			topScores.put(playerName.toLowerCase(), totalPoints);
 
 			topScores = sortByValueDescending(topScores);
 
@@ -90,9 +93,8 @@ public class LeaderBoard {
 
 	/* [FUNCTION THAT UPDATES THE LEADERBOARD FILE] */
 	private static void updateLeaderBoardFile(HashMap<String, Integer> topScores) {
-		String filePath = "score/top_scores.txt";
 
-		try (PrintWriter writer = new PrintWriter(new FileWriter(filePath))) {
+		try (PrintWriter writer = new PrintWriter(new FileWriter(SCORE_PATH))) {
 			topScores.entrySet()
 			.stream()
 			.forEach(entry -> writer.println(entry.getKey() + ":" + entry.getValue()));

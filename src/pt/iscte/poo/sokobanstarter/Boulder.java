@@ -3,26 +3,28 @@ package pt.iscte.poo.sokobanstarter;
 import pt.iscte.poo.gui.ImageMatrixGUI;
 import pt.iscte.poo.utils.Point2D;
 
-public class Martelo extends GameElement {
+public class Boulder extends GameElement{
 
-	/* [HAMMER CONSTRUCTOR] */
-	public Martelo(Point2D position) {
+	/* [BOULDER CONSTRUCTOR] */
+	public Boulder(Point2D position) {
 		super(position);
-		setName("Martelo");
+		setName("BigStone2");
 	}
 	
 	/* [LAYER GETTER] */
 	@Override
-	public int getLayer() {
-		return 1;
+	public int getLayer(){
+		return 3;
 	}
 	
-	/* [HAMMER INTERACT FUNCTION] */
+	/* [BOULDER INTERACT FUNCTION] */
+	@Override
 	public boolean interact(GameElement other){
-		if(other instanceof Empilhadora){
+		if(other instanceof Explosive){
 			GameEngine.getInstance().removeElement(this);
 			ImageMatrixGUI.getInstance().removeImage(this);
-			((Empilhadora) other).pickHammer();
+			GameEngine.getInstance().removeElement(other);
+			ImageMatrixGUI.getInstance().removeImage(other);
 			return true;
 		}
 		return false;

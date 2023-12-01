@@ -4,7 +4,7 @@ public class Main {
 
 	/* [RUNS THE GAME] */
     public static void main(String[] args) {
-        Utilizador user = HandleLogin.login();
+        User user = HandleLogin.login();
         
         if (user == null) {
             System.out.println("User canceled Login");

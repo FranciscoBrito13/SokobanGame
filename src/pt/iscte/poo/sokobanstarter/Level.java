@@ -10,25 +10,25 @@ import pt.iscte.poo.gui.ImageMatrixGUI;
 import pt.iscte.poo.gui.ImageTile;
 import pt.iscte.poo.utils.Point2D;
 
-public class Nivel {
+public class Level {
 
 	/* [LEVEL VARIABLES] */
 	private int level = 1;
 	public static final int maxLevel = 7;
 	/* [TILEMAP/BOBCAT] */
 	private List<GameElement> tileMap;
-	private Empilhadora bobcat;
+	private Bobcat bobcat;
 	/* [GAME ELEMENT LISTS] */
-	List<Alvo> alvos;
-	List<Teleporte> teleportes;
-	List<Buraco> buracos;
-	List<Caixote> caixotes;
+	List<Target> alvos;
+	List<Teleport> teleportes;
+	List<Hole> buracos;
+	List<Box> caixotes;
 	/* [GUI] */
 	private ImageMatrixGUI gui;
 
 	
 	/* [LEVEL CONSTRUCTOR] */
-	public Nivel(){
+	public Level(){
 		tileMap = new ArrayList<>();
 
 		gui = ImageMatrixGUI.getInstance();
@@ -53,79 +53,79 @@ public class Nivel {
 
 					switch (ch) {
 					case '#':
-						tileMap.add(new Parede(ponto));
-						tileList.add(new Parede(ponto));
+						tileMap.add(new Wall(ponto));
+						tileList.add(new Wall(ponto));
 						break;
 					case 'E':
-						tileList.add(new Chao(ponto));
-						bobcat = Empilhadora.getInstance();
+						tileList.add(new Floor(ponto));
+						bobcat = Bobcat.getInstance();
 						bobcat.setInitialPosition(ponto);
 						bobcat.resetEmpilhadora();
 						tileMap.add(bobcat);
 						tileList.add(bobcat);
 						break;
 					case 'C':
-						Caixote caixote = new Caixote(ponto);
+						Box caixote = new Box(ponto);
 						tileMap.add(caixote);
 						tileList.add(caixote);
-						tileList.add(new Chao(ponto));
+						tileList.add(new Floor(ponto));
 
 						break;
 					case '=':
-						tileList.add(new Vazio(ponto));
+						tileList.add(new Void(ponto));
 						break;
 					case 'B':
-						Bateria b = new Bateria(ponto);
+						Battery b = new Battery(ponto);
 						tileMap.add(b);
 						tileList.add(b);
 						break;
 					case 'X':
-						Alvo a = new Alvo(ponto);
+						Target a = new Target(ponto);
 						tileMap.add(a);
 						tileList.add(a);
 						break;
 					case 'T':
-						Teleporte t = new Teleporte(ponto);
+						Teleport t = new Teleport(ponto);
 						tileMap.add(t);
 						tileList.add(t);
 						break;
 					case 'O':
-						Buraco buraco = new Buraco(ponto);
+						Hole buraco = new Hole(ponto);
 						tileMap.add(buraco);
 						tileList.add(buraco);
 						break;
 					case 'P':
-						Palete p = new Palete(ponto);
+						Pallet p = new Pallet(ponto);
 						tileMap.add(p);
 						tileList.add(p);
-						tileList.add(new Chao(ponto));
+						tileList.add(new Floor(ponto));
 						break;
 					case 'M':
-						Martelo m = new Martelo(ponto);
+						Hammer m = new Hammer(ponto);
 						tileMap.add(m);
 						tileList.add(m);
-						tileList.add(new Chao(ponto));
+						tileList.add(new Floor(ponto));
 						break;
 					case '%':
-						ParedeRachada paredeRachada = new ParedeRachada(ponto);
+						FracturedWall paredeRachada = new FracturedWall(ponto);
 						tileMap.add(paredeRachada);
 						tileList.add(paredeRachada);
-						tileList.add(new Chao(ponto));
+						tileList.add(new Floor(ponto));
 						break;
 					case '&':
-						Explosivo e = new Explosivo(ponto);
+						Explosive e = new Explosive(ponto);
 						tileMap.add(e);
 						tileList.add(e);
-						tileList.add(new Chao(ponto));
+						tileList.add(new Floor(ponto));
 						break;
 					case 'U':
-						PedraGrande pg = new PedraGrande(ponto);
+						Boulder pg = new Boulder(ponto);
 						tileMap.add(pg);
 						tileList.add(pg);
-						tileList.add(new Chao(ponto));
+						tileList.add(new Floor(ponto));
 						break;
 					default:
-						tileList.add(new Chao(ponto));
+						tileList.add(new Floor(ponto));
 						break;
 					}
 				}
@@ -143,44 +143,44 @@ public class Nivel {
 	}
 
 	/* [FUNCTION THAT LOADS THE BOXES] */
-	private List<Caixote> loadCaixotes() {
+	private List<Box> loadCaixotes() {
 		caixotes = new ArrayList<>();
 		for (GameElement ge : tileMap) {
-			if (ge instanceof Caixote) {
-				caixotes.add((Caixote) ge);
+			if (ge instanceof Box) {
+				caixotes.add((Box) ge);
 			}
 		}
 		return caixotes;
 	}
 
 	/* [FUNCTION THAT LOADS THE TARGETS] */
-	private List<Alvo> loadAlvos() {
+	private List<Target> loadAlvos() {
 		alvos = new ArrayList<>();
 		for (GameElement ge : tileMap) {
-			if (ge instanceof Alvo) {
-				alvos.add((Alvo) ge);
+			if (ge instanceof Target) {
+				alvos.add((Target) ge);
 			}
 		}
 		return alvos;
 	}
 
 	/* [FUNCTION THAT LOADS THE TELEPORTERS] */
-	private List<Teleporte> loadTeleportes() {
+	private List<Teleport> loadTeleportes() {
 		teleportes = new ArrayList<>();
 		for (GameElement ge : tileMap) {
-			if (ge instanceof Teleporte) {
-				teleportes.add((Teleporte) ge);
+			if (ge instanceof Teleport) {
+				teleportes.add((Teleport) ge);
 			}
 		}
 		return teleportes;
 	}
 	
 	/* [FUNCTION THAT LOADS THE HOLES] */
-	private List<Buraco> loadBuracos(){
+	private List<Hole> loadBuracos(){
 		buracos = new ArrayList<>();
 		for (GameElement ge : tileMap) {
-			if (ge instanceof Buraco) {
-				buracos.add((Buraco) ge);
+			if (ge instanceof Hole) {
+				buracos.add((Hole) ge);
 			}
 		}
 		return buracos;
@@ -234,22 +234,22 @@ public class Nivel {
 	}
 
 	/* [LIST OF TARGETS GETTER] */
-	public List<Alvo> getAlvos(){
+	public List<Target> getAlvos(){
 		return alvos;
 	}
 	
 	/* [BOBCAT GETTER] */
-	public Empilhadora getBobcat() {
+	public Bobcat getBobcat() {
 		return bobcat;
 	}
 
 	/* [LIST OF TELEPORTER GETTER] */
-	public List<Teleporte> getTeleportes(){
+	public List<Teleport> getTeleportes(){
 		return teleportes;
 	}
 	
 	/* [LIST OF BOXES GETTER] */
-	public List<Caixote> getCaixotes(){
+	public List<Box> getCaixotes(){
 		return caixotes;
 	}
 

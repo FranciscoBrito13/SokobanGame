@@ -5,10 +5,10 @@ import java.util.List;
 import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
 
-public class Caixote extends GameElement implements Movable{
+public class Box extends GameElement implements Movable{
 
 	/* [BOX CONSTRUCTOR] */
-	public Caixote(Point2D position){
+	public Box(Point2D position){
 		super(position);
 		setPriority(1);
 		setName("Caixote");
@@ -28,7 +28,7 @@ public class Caixote extends GameElement implements Movable{
 		Vector2D moveVector = Vector2D.movementVector(otherPosition, initialPosition);
 		Point2D newBoxPoint = initialPosition.plus(moveVector);
 		
-		if(other instanceof Empilhadora){
+		if(other instanceof Bobcat){
 			boolean canMove = true;
 			List<GameElement> elements = GameEngine.getInstance().getGameElement(newBoxPoint);
 			elements.sort((g1, g2) -> g2.getPriority() - g1.getPriority());

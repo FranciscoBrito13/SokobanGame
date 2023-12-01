@@ -2,10 +2,10 @@ package pt.iscte.poo.sokobanstarter;
 
 import pt.iscte.poo.utils.Point2D;
 
-public class Alvo extends GameElement{
+public class Target extends GameElement{
 	
 	/* [TARGET CONSTRUCTOR]*/
-	public Alvo(Point2D position) {
+	public Target(Point2D position) {
 		super(position);
 		setName("Alvo2");
 	}

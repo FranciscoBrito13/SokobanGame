@@ -66,7 +66,7 @@ public class HandleLogin {
 	}
 
 	/* [LOGIN FUNCTION] */
-	public static Utilizador login() {
+	public static User login() {
 		String userPassword = "";
 		String userName = ImageMatrixGUI.getInstance().askUser("Username:");
 
@@ -85,7 +85,7 @@ public class HandleLogin {
 
 				if(correctPassword(userName, userPassword)){
 					ImageMatrixGUI.getInstance().setMessage("Have a good game!");
-					return new Utilizador(userName, userPassword);
+					return new User(userName, userPassword);
 				} 
 				
 				userPassword = "";
@@ -96,7 +96,7 @@ public class HandleLogin {
 			ImageMatrixGUI.getInstance().setMessage("New user, create a new password!");
 			userPassword = ImageMatrixGUI.getInstance().askUser("Password:");
 			createUser(userName, userPassword);
-			return new Utilizador(userName, userPassword);
+			return new User(userName, userPassword);
 
 		}
 		return null;

@@ -2,18 +2,18 @@ package pt.iscte.poo.sokobanstarter;
 
 import pt.iscte.poo.utils.Point2D;
 
-public class Parede extends GameElement {
+public class Floor extends GameElement {
 
-	/* [WALL CONSTRUCTOR] */
-	public Parede(Point2D position) {
+	/* [FLOOR CONSTRUCTOR] */
+	public Floor(Point2D position){
 		super(position);
-		setName("Parede");
+		setName("Chao");
 	}
-
+	
 	/* [LAYER GETTER] */
 	@Override
 	public int getLayer() {
-		return 4;
+		return 0;
 	}
 
 }

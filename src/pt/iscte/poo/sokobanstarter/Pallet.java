@@ -5,10 +5,10 @@ import java.util.List;
 import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
 
-public class Palete extends GameElement implements Movable {
+public class Pallet extends GameElement implements Movable {
 
 	/* [PALLET CONSTRUCTOR] */
-	public Palete(Point2D position) {
+	public Pallet(Point2D position) {
 		super(position);
 		setName("Palete");
 	}
@@ -26,7 +26,7 @@ public class Palete extends GameElement implements Movable {
 		Vector2D moveVector = Vector2D.movementVector(bobcatPosition, boxPosition);
 		Point2D newBoxPoint = boxPosition.plus(moveVector);
 		
-		if(other instanceof Empilhadora){
+		if(other instanceof Bobcat){
 			boolean canMove = true;
 			List<GameElement> elements = GameEngine.getInstance().getGameElement(newBoxPoint);
 			for(GameElement g : elements){

@@ -3,28 +3,26 @@ package pt.iscte.poo.sokobanstarter;
 import pt.iscte.poo.gui.ImageMatrixGUI;
 import pt.iscte.poo.utils.Point2D;
 
-public class PedraGrande extends GameElement{
+public class Hammer extends GameElement {
 
-	/* [BOULDER CONSTRUCTOR] */
-	public PedraGrande(Point2D position) {
+	/* [HAMMER CONSTRUCTOR] */
+	public Hammer(Point2D position) {
 		super(position);
-		setName("BigStone2");
+		setName("Martelo");
 	}
 	
 	/* [LAYER GETTER] */
 	@Override
-	public int getLayer(){
-		return 3;
+	public int getLayer() {
+		return 1;
 	}
 	
-	/* [BOULDER INTERACT FUNCTION] */
-	@Override
+	/* [HAMMER INTERACT FUNCTION] */
 	public boolean interact(GameElement other){
-		if(other instanceof Explosivo){
+		if(other instanceof Bobcat){
 			GameEngine.getInstance().removeElement(this);
 			ImageMatrixGUI.getInstance().removeImage(this);
-			GameEngine.getInstance().removeElement(other);
-			ImageMatrixGUI.getInstance().removeImage(other);
+			((Bobcat) other).pickHammer();
 			return true;
 		}
 		return false;

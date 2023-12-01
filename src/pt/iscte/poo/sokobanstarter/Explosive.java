@@ -5,10 +5,10 @@ import java.util.List;
 import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
 
-public class Explosivo extends GameElement implements Movable{
+public class Explosive extends GameElement implements Movable{
 
 	/* [EXPLOSIVE CONSTRUCTOR] */
-	public Explosivo(Point2D position) {
+	public Explosive(Point2D position) {
 		super(position);
 		setName("Explosivo");
 		setPriority(1);
@@ -28,7 +28,7 @@ public class Explosivo extends GameElement implements Movable{
 		Vector2D moveVector = Vector2D.movementVector(otherPosition, initialPosition);
 		Point2D newBoxPoint = initialPosition.plus(moveVector);
 		
-		if(other instanceof Empilhadora){
+		if(other instanceof Bobcat){
 			boolean canMove = true;
 			List<GameElement> elements = GameEngine.getInstance().getGameElement(newBoxPoint);
 			elements.sort((g1, g2) -> g2.getPriority() - g1.getPriority());

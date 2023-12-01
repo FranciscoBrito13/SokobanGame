@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class Utilizador {
+public class User {
 	
 	/* [USER VARIABLES] */
 	private String username;
@@ -16,7 +16,7 @@ public class Utilizador {
 	private int totalPoints = 0;
 
 	/* [USER CONSTRUCTOR] */
-	public Utilizador(String username, String password) {
+	public User(String username, String password) {
 		this.username = username;
 		this.password = password;
 		this.levelPoints = new HashMap<>();
@@ -60,13 +60,14 @@ public class Utilizador {
 	}
 
 	/* [FUNCTION THAT RETURNS THE PREVIOUS TOP SCORE] */
+	//IF THERES AN ADDED LEVEL THAN THE PREVIOUS SCORE WILL ALWAYS UPDATE
 	public int getPreviousTopScore() {
 		
 		String filePath = "score/" + username + "_score.txt";
 
 		try (Scanner scanner = new Scanner(new File(filePath))) {
 
-			for (int i = 0; i < Nivel.maxLevel + 1 && scanner.hasNextLine(); i++) {
+			for (int i = 0; i < Level.maxLevel + 1 && scanner.hasNextLine(); i++) {
 				scanner.nextLine();
 			}
 
@@ -75,6 +76,7 @@ public class Utilizador {
 
 
                 String[] words = line.split(" ");
+                System.out.println(words[1]);
                 return Integer.parseInt(words[1]);
 			}
 		} catch (IOException e) {

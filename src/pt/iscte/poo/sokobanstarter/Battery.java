@@ -3,13 +3,13 @@ package pt.iscte.poo.sokobanstarter;
 import pt.iscte.poo.gui.ImageMatrixGUI;
 import pt.iscte.poo.utils.Point2D;
 
-public class Bateria extends GameElement{
+public class Battery extends GameElement{
 	
 	/*[BATTERY AMMOUT]*/
 	private int batteryAmount = 50;
 
 	/*[BATTERY CONSTRUCTOR]*/
-	public Bateria(Point2D position) {
+	public Battery(Point2D position) {
 		super(position);
 		setName("Bateria");
 	}
@@ -29,11 +29,11 @@ public class Bateria extends GameElement{
 	/* [BATTERY INTERACT FUNCTION] */
 	@Override
 	public boolean interact(GameElement other) {
-		if(other instanceof Empilhadora){
-			Empilhadora.getInstance().consumeBattery(this);
+		if(other instanceof Bobcat){
+			Bobcat.getInstance().consumeBattery(this);
 			ImageMatrixGUI.getInstance().removeImage(this);
 			GameEngine.getInstance().removeElement(this);
-			ImageMatrixGUI.getInstance().addImage(new Chao(getPosition()));
+			ImageMatrixGUI.getInstance().addImage(new Floor(getPosition()));
 			return true;
 		} 
 		return false;

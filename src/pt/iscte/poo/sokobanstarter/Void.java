@@ -2,14 +2,14 @@ package pt.iscte.poo.sokobanstarter;
 
 import pt.iscte.poo.utils.Point2D;
 
-public class Chao extends GameElement {
+public class Void extends GameElement {
 
-	/* [FLOOR CONSTRUCTOR] */
-	public Chao(Point2D position){
+	/* [VOID CONSTRUCTOR] */
+	public Void(Point2D position) {
 		super(position);
-		setName("Chao");
+		setName("Vazio");
 	}
-	
+
 	/* [LAYER GETTER] */
 	@Override
 	public int getLayer() {

@@ -5,10 +5,10 @@ import java.util.List;
 import pt.iscte.poo.utils.Point2D;
 
 
-public class Teleporte extends GameElement{
+public class Teleport extends GameElement{
 
 	/* [TELEPORT CONSTRUCTOR] */
-	public Teleporte(Point2D position) {
+	public Teleport(Point2D position) {
 		super(position);
 		setName("Teleporte");
 	}
@@ -20,18 +20,18 @@ public class Teleporte extends GameElement{
 	}
 	
 	/* [TELEPORT'S PAIR GETTER] */
-	private Teleporte getPair() {
+	private Teleport getPair() {
 	    GameEngine gEngine = GameEngine.getInstance();
-	    List<Teleporte> teleportes = gEngine.getTeleportes();
+	    List<Teleport> teleportes = gEngine.getTeleportes();
 	    
-	    for (Teleporte t : teleportes)
+	    for (Teleport t : teleportes)
 	    	if (!t.getPosition().equals(getPosition())) return t;
 	    return null;
 	}
 
 	/* [FUNCTION THAT CHECKS IF THE TELEPORT HAS SOMETHING ABOVE IT] */
 	private boolean isPairFree() {
-	    Teleporte pair = getPair();
+	    Teleport pair = getPair();
 	    
 	    if (pair != null) {
 	        List<GameElement> elementos = GameEngine.getInstance().getGameElement(pair.getPosition());

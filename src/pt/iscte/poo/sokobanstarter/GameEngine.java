@@ -1,6 +1,3 @@
-
-//ADICIONAR UM FICHEIRO COM HIGHSCORE
-
 package pt.iscte.poo.sokobanstarter;
 
 import java.awt.event.KeyEvent;
@@ -21,14 +18,17 @@ public class GameEngine implements Observer {
 
 	/*[GAMEENGINE INSTANCE]*/
 	private static GameEngine INSTANCE;
-	
+
 	/*[LEVEL/BOBCAT/GUI]*/
-	private Nivel level = new Nivel();
+	private Level level = new Level();
 	private ImageMatrixGUI gui = level.getGui();  	
-	private Empilhadora bobcat;
+	private Bobcat bobcat;
 
 	/*[USER]*/
-	private Utilizador user; // Add this field
+	private User user; // Add this field
+
+	/*[CONSTANTS]*/
+	private static final double POINTS_MULTIPLIER = 15.0;
 
 	/*[SINGLETON CONSTRUCTOR]*/
 	private GameEngine() {
@@ -48,7 +48,7 @@ public class GameEngine implements Observer {
 		level.createGame(); 
 		bobcat = level.getBobcat();
 		gui.update();
-		gui.setStatusMessage("NickName: " + "+" + user.getUsername()+ "'" +  " LEVEL:" + level.getLevel() + " BATTERY:" + bobcat.getBateria());
+		gui.setStatusMessage("NickName: " + "'" + user.getUsername()+ "'" +  " LEVEL:" + level.getLevel() + " BATTERY:" + bobcat.getBateria());
 
 	}
 
@@ -95,7 +95,7 @@ public class GameEngine implements Observer {
 		user.resetPoints();
 		level.resetGame();
 	}
-	
+
 	/*[CHECKS IF THE GAME IS OVER]*/
 	private boolean isGameOver(){
 		if(bobcat.getBateria() <= 0){
@@ -111,23 +111,26 @@ public class GameEngine implements Observer {
 
 	/*[HANDLES THE LEVEL COMPLETION AND GAME COMPLETION]*/
 	private void handleLevelCompletion() {
-		user.setPointsForLevel(level.getLevel(), (int) (15 * Math.log(level.getLevel() + 1) * bobcat.getBateria()));
-		if(level.getLevel() == Nivel.maxLevel){
-			if(user.getPreviousTopScore() < user.getTotalPoints()){
-				LeaderBoard.updateLeaderBoard(user.getUsername(),user.getTotalPoints());
-				user.writeScore();
-				gui.setMessage("You finished the game with a new record!!");
-				user.resetPoints();
-				level.resetGame();
-				return;
-			}
-			LeaderBoard.updateLeaderBoard(user.getUsername(),user.getTotalPoints());
+		int currentLevel = level.getLevel();
+		double points = POINTS_MULTIPLIER * Math.log(currentLevel + 1) * bobcat.getBateria();
+		user.setPointsForLevel(currentLevel, (int) points);
+
+		if (currentLevel == Level.maxLevel) handleMaxLevelCompletion();
+		else level.increaseLevel();
+
+	}
+
+	/*[HANDLES THE GAME COMPLETION]*/
+	private void handleMaxLevelCompletion() {
+		if (user.getPreviousTopScore() < user.getTotalPoints()) {
+			user.writeScore();
+			gui.setMessage("You finished the game with a new record!!");
+			LeaderBoard.updateLeaderBoard(user.getUsername(), user.getTotalPoints());
+		} else {
 			gui.setMessage("The game is over!!");
-			user.resetPoints();
-			level.resetGame();
-			return;
-		} 
-		level.increaseLevel();
+		}
+		user.resetPoints();
+		level.resetGame();
 	}
 
 	/*[HANDLES DIFFERENT KEYS FROM MOVEMENT]*/
@@ -138,24 +141,24 @@ public class GameEngine implements Observer {
 
 	/*[CHECKS IF EACH TARGET HAS A BOX IN THE SAME POSITION, IF ALL MATCH THAT STATMENT IT RETRUNS TRUE]*/
 	private boolean boxInPlace() {
-	    return level.getAlvos().stream()
-	            .allMatch(alvo -> level.getTileMap().stream()
-	                    .filter(ge -> ge instanceof Caixote)
-	                    .map(ge -> (Caixote) ge)
-	                    .anyMatch(caixote -> caixote.getPosition().equals(alvo.getPosition())));
+		return level.getAlvos().stream()
+				.allMatch(alvo -> level.getTileMap().stream()
+						.filter(ge -> ge instanceof Box)
+						.map(ge -> (Box) ge)
+						.anyMatch(caixote -> caixote.getPosition().equals(alvo.getPosition())));
 	}
-	
+
 
 
 	/*[RETURNS ALL GAME ELEMENTS IN A GIVEN POSITION]*/
 	public List<GameElement> getGameElement(Point2D p) {
-	    List<GameElement> elementsAtPoint = new ArrayList<>(level.getTileMap());
-	    elementsAtPoint.removeIf(gameElement -> !gameElement.getPosition().equals(p));
-	    return elementsAtPoint;
+		List<GameElement> elementsAtPoint = new ArrayList<>(level.getTileMap());
+		elementsAtPoint.removeIf(gameElement -> !gameElement.getPosition().equals(p));
+		return elementsAtPoint;
 	}
 
 	/*[RETURNS THE TELEPORT PAIR]*/
-	public List<Teleporte> getTeleportes(){
+	public List<Teleport> getTeleportes(){
 		return level.getTeleportes();
 	}
 
@@ -167,7 +170,7 @@ public class GameEngine implements Observer {
 	}
 
 	/*[SETS THE USER FOR THE GAME]*/
-	public void setCurrentUser(Utilizador user) {
+	public void setCurrentUser(User user) {
 		this.user = user;
 	}
 

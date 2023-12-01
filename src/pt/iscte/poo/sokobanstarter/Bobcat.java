@@ -3,10 +3,10 @@ package pt.iscte.poo.sokobanstarter;
 import java.awt.event.KeyEvent;
 import pt.iscte.poo.utils.Point2D;
 
-public class Empilhadora extends GameElement implements Movable {
+public class Bobcat extends GameElement implements Movable {
 
 	/* [BOTCAT INSTANCE] */
-    private static Empilhadora INSTANCE; 
+    private static Bobcat INSTANCE; 
     /* [BOBCAT IMAGE NAME] */
     private String imageName = "Empilhadora_U";
     /* [BOBCAT INITIAL POSITION] */
@@ -20,16 +20,16 @@ public class Empilhadora extends GameElement implements Movable {
     private boolean hasHammer = false;
     
     /* [BOBCAT CONSTRUCTOR] */
-    private Empilhadora(Point2D position) {
+    private Bobcat(Point2D position) {
         super(position);
         initialPosition = position;
         curBattery = maxBattery;
     }
 
     /* [BOBCAT INSTANCE GETTER] */
-    public static Empilhadora getInstance() {
+    public static Bobcat getInstance() {
         if (INSTANCE == null)
-            INSTANCE = new Empilhadora(new Point2D(0, 0));
+            INSTANCE = new Bobcat(new Point2D(0, 0));
         return INSTANCE;
     }
 
@@ -81,7 +81,7 @@ public class Empilhadora extends GameElement implements Movable {
     }
 
     /* [FUNCTION THAT SUMS AN AMMOUNT TO THE CURRENT BATTERY AND CAPS IT AT 100] */
-    public void consumeBattery(Bateria b) {
+    public void consumeBattery(Battery b) {
     	setBateria(Math.min(getBateria() + b.getBattery(), maxBattery + 1));
     }
     

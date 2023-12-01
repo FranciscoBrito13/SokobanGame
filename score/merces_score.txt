@@ -1,9 +1,9 @@
 Username: merces
-Level 1: 405 points
-Level 2: 395 points
-Level 3: 603 points
-Level 4: 917 points
-Level 5: 1800 points
-Level 6: 1576 points
-Level 7: 2869 points
-Total: 8565 pontos
+Level 1: 571 points
+Level 2: 576 points
+Level 3: 228 points
+Level 4: 1569 points
+Level 5: 1263 points
+Level 6: 2802 points
+Level 7: 2651 points
+Total: 9660 pontos

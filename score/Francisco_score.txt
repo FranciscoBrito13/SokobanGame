@@ -1,9 +1,0 @@
-Username: francisco
-Level 1: 571 points
-Level 2: 543 points
-Level 3: 519 points
-Level 4: 1520 points
-Level 5: 1370 points
-Level 6: 2802 points
-Level 7: 2651 points
-Total: 9976 pontos

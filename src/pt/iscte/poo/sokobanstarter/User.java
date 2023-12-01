@@ -63,7 +63,7 @@ public class User {
 	//IF THERES AN ADDED LEVEL THAN THE PREVIOUS SCORE WILL ALWAYS UPDATE
 	public int getPreviousTopScore() {
 		
-		String filePath = "score/" + username + "_score.txt";
+		String filePath = "score/" + username.toLowerCase() + "_score.txt";
 
 		try (Scanner scanner = new Scanner(new File(filePath))) {
 
@@ -89,10 +89,10 @@ public class User {
 	/* [FUNCTION THAT WRITES THE SCORES IN THE USER'S SCORE FILE] */
 	public void writeScore() {
 		System.out.println("Writing user' score... ");
-		String fileName = "score/" + username + "_score.txt";
+		String fileName = "score/" + username.toLowerCase() + "_score.txt";
 
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
-			writer.write("Username: " + username + "\n");
+			writer.write("Username: " + username.toLowerCase() + System.lineSeparator());
 
 			for (int i : levelPoints.keySet()) {
 				int level = i;

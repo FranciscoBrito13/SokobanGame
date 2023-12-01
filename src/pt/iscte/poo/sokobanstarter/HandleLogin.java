@@ -47,7 +47,7 @@ public class HandleLogin {
 	}
 
 	/* [CHECKS IF AN USER EXISTS ON THE USERS FILE] */
-	public static boolean existsUser(String user) {
+	public static boolean existsUser(String userName) {
 		String folderPath = "users/";
 		String fileName = folderPath + "users";
 
@@ -56,7 +56,7 @@ public class HandleLogin {
 				String line = s.nextLine();
 				String name = line.split(":")[0];
 
-				if(name.equals(user.toLowerCase())) return true;
+				if(name.equals(userName.toLowerCase())) return true;
 			}
 		} catch (IOException e) {
 			System.out.println("Creating users.txt file...");

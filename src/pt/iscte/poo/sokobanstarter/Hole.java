@@ -24,31 +24,25 @@ public class Hole extends GameElement{
 		
 		//INTERACTION WITH BOBCAT, GAME OVER
 		if(other instanceof Bobcat){
+			if(((Bobcat) other).checkPredicateInventory(i -> i instanceof MudBucket)){
+				GameEngine.getInstance().removeElement(this);
+				ImageMatrixGUI.getInstance().removeImage(this);
+				((Bobcat) other).removeMudBucket();
+				ImageMatrixGUI.getInstance().addImage(new Floor(getPosition()));
+				return true;
+			}
 			GameEngine.getInstance().handleGameOver();
 			ImageMatrixGUI.getInstance().setMessage("The bobcat fell into the hole and turned back to go to the workshop");
 			return false;
 		}
-		//INTERACTION WITH CAIXOTE, REMOVES IMAGE AND ELEMENT
-		if(other instanceof Box){
-			GameEngine.getInstance().removeElement(other);
-			ImageMatrixGUI.getInstance().removeImage(other);
-			return true;
-		}
-		//INTERACTION WITH EXPLOSIVE, REMOVES ELEMENT AND IMAGE
-		if(other instanceof Explosive){
-			GameEngine.getInstance().removeElement(other);
-			ImageMatrixGUI.getInstance().removeImage(other);
-			return true;
-		}
 		//INTERACTION WITH PALLET, REMOVES THE OTHER ELEMENT AND THE HOLE, CHANGES THE HOLE IMAGE
 		if(other instanceof Pallet){
 			setName("Buraco_Palete");
-			ImageMatrixGUI.getInstance().removeImage(other);
-			GameEngine.getInstance().removeElement(other);
 			GameEngine.getInstance().removeElement(this);
 			
-			
 		}
+		GameEngine.getInstance().removeElement(other);
+		ImageMatrixGUI.getInstance().removeImage(other);
 		return true;
 	}
 

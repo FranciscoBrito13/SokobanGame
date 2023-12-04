@@ -125,6 +125,11 @@ public class Bobcat extends GameElement implements Movable {
 		inventory.add(item);
 	}
 	
+	/*[REMOVES ALL INSTANCES OF THE MUDBUCKET IN THE INVENTORY (Limit should always be 1 tho)]*/
+	public void removeMudBucket(){
+		inventory.removeIf(ge -> ge instanceof MudBucket);
+	}
+	
 	/* [FUNCTION THT CHECKS IF A GIVEN ITEM IN A PREDICATE FORM IS IN THE INVENTORY] */
 	public boolean checkPredicateInventory(Predicate<Item> p){
 		for(Item i : inventory){

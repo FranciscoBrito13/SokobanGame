@@ -124,6 +124,11 @@ public class Level {
 						tileList.add(pg);
 						tileList.add(new Floor(ponto));
 						break;
+					case 'L':
+						MudBucket mb = new MudBucket(ponto);
+						tileMap.add(mb);
+						tileList.add(mb);
+						tileList.add(new Floor(ponto));
 					default:
 						tileList.add(new Floor(ponto));
 						break;

@@ -17,11 +17,11 @@ public class FracturedWall extends GameElement{
 		return 4;
 	}
 	
-	/* [CRACKED WALL INTERACT FUNCTION] */
+	/* [FRACTURED WALL INTERACT FUNCTION] */
 	@Override
 	public boolean interact(GameElement other){
 		if(other instanceof Bobcat){
-			if(((Bobcat) other).hasHammer()){
+			if(((Bobcat) other).checkPredicateInventory(i -> i instanceof Hammer)){
 			GameEngine.getInstance().removeElement(this);
 			ImageMatrixGUI.getInstance().removeImage(this);
 			return true;

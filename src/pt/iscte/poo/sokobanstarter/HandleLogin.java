@@ -72,8 +72,8 @@ public class HandleLogin {
 
 		if(userName == null) throw new IllegalArgumentException("You canceled your Login");
 		if(userName.contains(":")) throw new IllegalArgumentException("Name cannot contain ':'");
-
 		if(userName.length() == 0)throw new IllegalArgumentException("User cannot be empty");
+		
 
 		if(existsUser(userName)){
 			ImageMatrixGUI.getInstance().setMessage("Existing user, enter password");

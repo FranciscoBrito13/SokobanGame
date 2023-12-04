@@ -3,7 +3,7 @@ package pt.iscte.poo.sokobanstarter;
 import pt.iscte.poo.gui.ImageMatrixGUI;
 import pt.iscte.poo.utils.Point2D;
 
-public class Hammer extends GameElement {
+public class Hammer extends GameElement implements Item {
 
 	/* [HAMMER CONSTRUCTOR] */
 	public Hammer(Point2D position) {
@@ -22,7 +22,7 @@ public class Hammer extends GameElement {
 		if(other instanceof Bobcat){
 			GameEngine.getInstance().removeElement(this);
 			ImageMatrixGUI.getInstance().removeImage(this);
-			((Bobcat) other).pickHammer();
+			((Bobcat) other).addItem(this);
 			return true;
 		}
 		return false;

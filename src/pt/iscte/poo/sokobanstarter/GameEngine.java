@@ -135,8 +135,11 @@ public class GameEngine implements Observer {
 
 	/*[HANDLES DIFFERENT KEYS FROM MOVEMENT]*/
 	private void handleOtherKeys(int key) {
-		if(key == KeyEvent.VK_R)
+		if(key == KeyEvent.VK_R){
 			level.restartLevel();
+		} else if(key == KeyEvent.VK_N){
+			level.increaseLevel();
+		}
 	}
 
 	/*[CHECKS IF EACH TARGET HAS A BOX IN THE SAME POSITION, IF ALL MATCH THAT STATMENT IT RETRUNS TRUE]*/

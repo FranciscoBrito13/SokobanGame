@@ -1,6 +1,10 @@
 package pt.iscte.poo.sokobanstarter;
 
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
+
 import pt.iscte.poo.utils.Point2D;
 
 public class Bobcat extends GameElement implements Movable {
@@ -16,8 +20,8 @@ public class Bobcat extends GameElement implements Movable {
     /* [BOBCAT BATTERY] */
     private int maxBattery = 100;
     private int curBattery;
-    /* [BOBCAT VARIABLE THAT VERIFY IF IT HAS A HAMMER] */
-    private boolean hasHammer = false;
+    /*[BOBCAT INVENTORY]*/
+    private List<Item> inventory = new ArrayList<>();
     
     /* [BOBCAT CONSTRUCTOR] */
     private Bobcat(Point2D position) {
@@ -56,7 +60,8 @@ public class Bobcat extends GameElement implements Movable {
     	curBattery = maxBattery;
     	setPosition(initialPosition);
     	imageName = "Empilhadora_U";
-    	hasHammer = false;
+    	inventory.clear();
+    	//hasHammer = false;
     	moves = 0;
     }
     
@@ -114,14 +119,19 @@ public class Bobcat extends GameElement implements Movable {
 	    decBateria();
         moves++;
 	}
-
-	/* [FUNCTION THAT SETS TRUE THE HASHAMMER VARIABLE] */
-	public void pickHammer() {
-		hasHammer = true;
+	
+	/* [FUNCTION THAT ADDS AN ITEM TO THE INVENTORY] */
+	public void addItem(Item item) {
+		inventory.add(item);
 	}
-
-	/* [HASHAMMER GETTER] */
-	public boolean hasHammer() {
-		return hasHammer;
+	
+	/* [FUNCTION THT CHECKS IF A GIVEN ITEM IN A PREDICATE FORM IS IN THE INVENTORY] */
+	public boolean checkPredicateInventory(Predicate<Item> p){
+		for(Item i : inventory){
+			if(p.test(i)){
+				return true;
+			}
+		}
+		return false;
 	}
 }

@@ -33,7 +33,6 @@ public class Battery extends GameElement{
 			Bobcat.getInstance().consumeBattery(this);
 			ImageMatrixGUI.getInstance().removeImage(this);
 			GameEngine.getInstance().removeElement(this);
-			ImageMatrixGUI.getInstance().addImage(new Floor(getPosition()));
 			return true;
 		} 
 		return false;

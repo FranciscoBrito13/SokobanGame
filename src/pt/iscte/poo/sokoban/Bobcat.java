@@ -71,23 +71,23 @@ public class Bobcat extends GameElement implements Movable {
     }
 
     /* [BOBCAT'S BATTERY GETTER] */
-    public int getBateria() {
+    public int getBattery() {
         return curBattery;
     }
     
     /* [BOBCAT'S BATTERY SETTER] */
-    private void setBateria(int batteryAmount) {
+    private void setBattery(int batteryAmount) {
         curBattery = batteryAmount;
     }
 
     /* [FUNCTION THAT DECREASES BOBCAT'S BATTERY] */
-    public void decBateria() {
+    public void decBattery() {
         curBattery--;
     }
 
     /* [FUNCTION THAT SUMS AN AMMOUNT TO THE CURRENT BATTERY AND CAPS IT AT 100] */
     public void consumeBattery(Battery b) {
-    	setBateria(Math.min(getBateria() + b.getBattery(), maxBattery + 1));
+    	setBattery(Math.min(getBattery() + b.getBattery(), maxBattery + 1));
     }
     
     /* [BOBCAT'S MAX BATTERY GETTER] */
@@ -116,7 +116,7 @@ public class Bobcat extends GameElement implements Movable {
 	@Override
 	public void move(Point2D p) {
 	    setPosition(p);
-	    decBateria();
+	    decBattery();
         moves++;
 	}
 	

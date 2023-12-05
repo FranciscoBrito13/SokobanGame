@@ -28,7 +28,7 @@ public class GameEngine implements Observer {
 	private User user; // Add this field
 
 	/*[CONSTANTS]*/
-	private static final double POINTS_MULTIPLIER = 15.0;
+	private static final double SCALING_FACTOR = 1.1;
 
 	/*[SINGLETON CONSTRUCTOR]*/
 	private GameEngine() {
@@ -48,7 +48,7 @@ public class GameEngine implements Observer {
 		level.createGame(); 
 		bobcat = level.getBobcat();
 		gui.update();
-		gui.setStatusMessage("NickName: " + "'" + user.getUsername()+ "'" +  " LEVEL:" + level.getLevel() + " BATTERY:" + bobcat.getBateria());
+		gui.setStatusMessage("NickName: " + "'" + user.getUsername()+ "'" +  " LEVEL:" + level.getLevel() + " BATTERY:" + bobcat.getBattery());
 
 	}
 
@@ -69,7 +69,7 @@ public class GameEngine implements Observer {
 		} else handleOtherKeys(key);
 
 
-		gui.setStatusMessage("NickName: '" + user.getUsername() + "'" +  " LEVEL:" + level.getLevel() + " BATTERY:" + bobcat.getBateria());
+		gui.setStatusMessage("NickName: '" + user.getUsername() + "'" +  " LEVEL:" + level.getLevel() + " BATTERY:" + bobcat.getBattery());
 		gui.update(); 
 	}
 
@@ -98,7 +98,7 @@ public class GameEngine implements Observer {
 
 	/*[CHECKS IF THE GAME IS OVER]*/
 	private boolean isGameOver(){
-		if(bobcat.getBateria() <= 0){
+		if(bobcat.getBattery() <= 0){
 			gui.setMessage("The bobcat ran out of battery, went back to the start to recharge :(");
 			return true;
 		}
@@ -112,7 +112,7 @@ public class GameEngine implements Observer {
 	/*[HANDLES THE LEVEL COMPLETION AND GAME COMPLETION]*/
 	private void handleLevelCompletion() {
 		int currentLevel = level.getLevel();
-		double points = POINTS_MULTIPLIER * Math.log(currentLevel + 1) * bobcat.getBateria();
+		double points = SCALING_FACTOR *  (currentLevel+1) * bobcat.getBattery();
 		user.setPointsForLevel(currentLevel, (int) points);
 
 		if (currentLevel == Level.maxLevel) handleMaxLevelCompletion();

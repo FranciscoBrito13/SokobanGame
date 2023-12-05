@@ -9,3 +9,9 @@ bitri:briti
 briti:123
 jorge:123
 salvador:asdasd
+pedro:123
+joao:123
+ricardo:23
+sara:123
+ines:123
+joana:123

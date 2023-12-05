@@ -13,7 +13,7 @@ import pt.iscte.poo.utils.Point2D;
 public class Level {
 
 	/* [LEVEL VARIABLES] */
-	private int level = 1;
+	private int level = 0;
 	public static final int maxLevel = 7;
 	/* [TILEMAP/BOBCAT] */
 	private List<GameElement> tileMap;
@@ -78,6 +78,7 @@ public class Level {
 						Battery b = new Battery(ponto);
 						tileMap.add(b);
 						tileList.add(b);
+						tileList.add(new Floor(ponto));
 						break;
 					case 'X':
 						Target a = new Target(ponto);

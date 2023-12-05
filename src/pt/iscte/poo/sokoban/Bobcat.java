@@ -61,7 +61,6 @@ public class Bobcat extends GameElement implements Movable {
     	setPosition(initialPosition);
     	imageName = "Empilhadora_U";
     	inventory.clear();
-    	//hasHammer = false;
     	moves = 0;
     }
     

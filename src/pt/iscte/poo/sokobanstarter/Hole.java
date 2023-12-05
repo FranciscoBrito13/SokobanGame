@@ -26,9 +26,9 @@ public class Hole extends GameElement{
 		if(other instanceof Bobcat){
 			if(((Bobcat) other).checkPredicateInventory(i -> i instanceof MudBucket)){
 				GameEngine.getInstance().removeElement(this);
-				ImageMatrixGUI.getInstance().removeImage(this);
+				setName("BuracoLama");
 				((Bobcat) other).removeMudBucket();
-				ImageMatrixGUI.getInstance().addImage(new Floor(getPosition()));
+				
 				return true;
 			}
 			GameEngine.getInstance().handleGameOver();

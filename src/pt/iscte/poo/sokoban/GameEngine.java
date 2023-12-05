@@ -56,7 +56,6 @@ public class GameEngine implements Observer {
 	@Override
 	public void update(Observed source) {
 		int key = gui.keyPressed();
-
 		if (isArrows(key)) {
 			handleArrowMovement(key);
 

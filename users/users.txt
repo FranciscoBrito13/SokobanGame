@@ -15,3 +15,4 @@ ricardo:23
 sara:123
 ines:123
 joana:123
+baria:baria1

@@ -5,7 +5,7 @@ import java.util.List;
 import pt.iscte.poo.utils.Point2D;
 import pt.iscte.poo.utils.Vector2D;
 
-public class Box extends GameElement implements Movable{
+public class Box extends GameElement implements Movable, Placable{
 
 	/* [BOX CONSTRUCTOR] */
 	public Box(Point2D position){

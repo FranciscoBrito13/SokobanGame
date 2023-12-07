@@ -60,14 +60,14 @@ public class User {
 	}
 
 	/* [FUNCTION THAT RETURNS THE PREVIOUS TOP SCORE] */
-	//IF THERES AN ADDED LEVEL THAN THE PREVIOUS SCORE WILL ALWAYS UPDATE
+	//IF THERES AN ADDED LEVEL, THEN THE PREVIOUS SCORE WILL ALWAYS UPDATE
 	public int getPreviousTopScore() {
 		
 		String filePath = "score/" + username.toLowerCase() + "_score.txt";
 
 		try (Scanner scanner = new Scanner(new File(filePath))) {
 
-			for (int i = 0; i < Level.maxLevel + 1 && scanner.hasNextLine(); i++) {
+			for (int i = 0; i < Level.maxLevel + 2 && scanner.hasNextLine(); i++) {
 				scanner.nextLine();
 			}
 
@@ -76,11 +76,11 @@ public class User {
 
 
                 String[] words = line.split(" ");
-                System.out.println(words[1]);
+                
                 return Integer.parseInt(words[1]);
 			}
 		} catch (IOException e) {
-			
+			System.out.println("No previous score found");
 		}
 
 		return 0;

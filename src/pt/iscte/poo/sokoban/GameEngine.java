@@ -101,7 +101,7 @@ public class GameEngine implements Observer {
 			gui.setMessage("The bobcat ran out of battery, went back to the start to recharge :(");
 			return true;
 		}
-		if(level.getCaixotes().size() < level.getAlvos().size()){
+		if(level.getPlacable().size() < level.getAlvos().size()){
 			gui.setMessage("You destroyed too many boxes, the bobcat had to go back to the beginning to get more");
 			return true;
 		};
@@ -129,7 +129,11 @@ public class GameEngine implements Observer {
 			gui.setMessage("The game is over!!");
 		}
 		user.resetPoints();
-		level.resetGame();
+		
+		gui.setMessage("Thank you for playing the game! The bobcat will get some sleep now :)");
+		System.exit(0); //Used instead of gui.dispose to close the java service 
+		
+		//level.resetGame();
 	}
 
 	/*[HANDLES DIFFERENT KEYS FROM MOVEMENT]*/
@@ -142,9 +146,9 @@ public class GameEngine implements Observer {
 	private boolean boxInPlace() {
 		return level.getAlvos().stream()
 				.allMatch(alvo -> level.getTileMap().stream()
-						.filter(ge -> ge instanceof Box)
-						.map(ge -> (Box) ge)
-						.anyMatch(caixote -> caixote.getPosition().equals(alvo.getPosition())));
+						.filter(ge -> ge instanceof Placable)
+						.map(ge -> (Placable) ge)
+						.anyMatch(pl -> pl.getPosition().equals(alvo.getPosition())));
 	}
 
 

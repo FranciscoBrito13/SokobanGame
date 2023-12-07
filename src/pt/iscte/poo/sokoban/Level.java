@@ -23,10 +23,11 @@ public class Level {
 	List<Teleport> teleportes;
 	List<Hole> buracos;
 	List<Box> caixotes;
+	List<Placable> placableObjects;
 	/* [GUI] */
 	private ImageMatrixGUI gui;
 
-	
+
 	/* [LEVEL CONSTRUCTOR] */
 	public Level(){
 		tileMap = new ArrayList<>();
@@ -35,7 +36,7 @@ public class Level {
 		gui.setSize(GameEngine.GRID_HEIGHT, GameEngine.GRID_WIDTH);
 	}
 
-	
+
 	/* [FUNCTION THAT CREATES THE GAME BY READING THE LEVEL FILES] */
 	public void createGame() {
 
@@ -138,10 +139,11 @@ public class Level {
 				y++;
 
 			}
-			alvos = loadAlvos();
-			teleportes = loadTeleportes();
-			buracos = loadBuracos();
-			caixotes = loadCaixotes();
+			loadAlvos();
+			loadTeleportes();
+			loadBuracos();
+			//loadCaixotes();
+			loadPlacable();
 			gui.addImages(tileList);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -149,15 +151,15 @@ public class Level {
 	}
 
 	/* [FUNCTION THAT LOADS THE BOXES] */
-	private List<Box> loadCaixotes() {
-		caixotes = new ArrayList<>();
-		for (GameElement ge : tileMap) {
-			if (ge instanceof Box) {
-				caixotes.add((Box) ge);
-			}
-		}
-		return caixotes;
-	}
+//	private List<Box> loadCaixotes() {
+//		caixotes = new ArrayList<>();
+//		for (GameElement ge : tileMap) {
+//			if (ge instanceof Box) {
+//				caixotes.add((Box) ge);
+//			}
+//		}
+//		return caixotes;
+//	}
 
 	/* [FUNCTION THAT LOADS THE TARGETS] */
 	private List<Target> loadAlvos() {
@@ -180,7 +182,7 @@ public class Level {
 		}
 		return teleportes;
 	}
-	
+
 	/* [FUNCTION THAT LOADS THE HOLES] */
 	private List<Hole> loadBuracos(){
 		buracos = new ArrayList<>();
@@ -191,13 +193,24 @@ public class Level {
 		}
 		return buracos;
 	}
-	
+
+	private List<Placable> loadPlacable(){
+		placableObjects = new ArrayList<>();
+		for (GameElement ge : tileMap) {
+			if (ge instanceof Placable) {
+				placableObjects.add((Placable) ge);
+			}
+		}
+		return placableObjects;
+	}
+
 	/* [FUNCTION THAT UPDATES ALL GAME ELEMENT LISTS] */
 	public void updateLists(){
 		alvos = loadAlvos();
 		buracos = loadBuracos();
 		teleportes = loadTeleportes();
-		caixotes = loadCaixotes();
+		//caixotes = loadCaixotes();
+		placableObjects = loadPlacable();
 	}
 
 	/* [LEVEL GETTER] */
@@ -213,7 +226,7 @@ public class Level {
 			gui.update();
 		}
 	}
-	
+
 	/* [FUNCTION THAT RESETS THE LEVEL] */
 	public void restartLevel() {
 		tileMap.clear();
@@ -243,7 +256,7 @@ public class Level {
 	public List<Target> getAlvos(){
 		return alvos;
 	}
-	
+
 	/* [BOBCAT GETTER] */
 	public Bobcat getBobcat() {
 		return bobcat;
@@ -253,11 +266,14 @@ public class Level {
 	public List<Teleport> getTeleportes(){
 		return teleportes;
 	}
-	
-	/* [LIST OF BOXES GETTER] */
-	public List<Box> getCaixotes(){
-		return caixotes;
-	}
 
+	/* [LIST OF BOXES GETTER] */
+//	public List<Box> getCaixotes(){
+//		return caixotes;
+//	}
+
+	public List<Placable> getPlacable(){
+		return placableObjects;
+	}
 
 }

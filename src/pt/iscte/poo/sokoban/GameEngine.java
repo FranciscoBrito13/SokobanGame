@@ -45,6 +45,7 @@ public class GameEngine implements Observer {
 
 	/*[FUNCION TO START THE GAME]*/
 	public void start(){
+		gui.setMessage("Welcome to Bobcoban! Use the arrow keys to move and the 'R' key to reset the level, the rest is up to you to discover");
 		level.createGame(); 
 		bobcat = level.getBobcat();
 		gui.update();

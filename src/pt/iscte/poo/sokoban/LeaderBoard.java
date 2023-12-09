@@ -17,7 +17,6 @@ public class LeaderBoard {
 	public static LinkedHashMap<String,Integer> getLeaderBoard(){
 
 		LinkedHashMap<String, Integer> topScores = new LinkedHashMap<>();
-		//String filePath = "score/top_scores.txt";
 
 		try (Scanner scanner = new Scanner(new File(SCORE_PATH))) {
 			while(scanner.hasNextLine()){
@@ -26,6 +25,7 @@ public class LeaderBoard {
 			}
 
 		} catch (IOException e) {
+			System.out.println("Ficheiro inexistente, a criar...");
 			e.printStackTrace();
 		}
 		return topScores;

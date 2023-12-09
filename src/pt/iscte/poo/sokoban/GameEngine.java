@@ -45,10 +45,10 @@ public class GameEngine implements Observer {
 
 	/*[FUNCION TO START THE GAME]*/
 	public void start(){
-		gui.setMessage("Welcome to Bobcoban! Use the arrow keys to move and the 'R' key to reset the level, the rest is up to you to discover");
 		level.createGame(); 
 		bobcat = level.getBobcat();
 		gui.update();
+		gui.setMessage("Welcome to Bobcoban! Use the arrow keys to move and the 'R' key to reset the level, the rest is up to you to discover");
 		gui.setStatusMessage("NickName: " + "'" + user.getUsername()+ "'" +  " LEVEL:" + level.getLevel() + " BATTERY:" + bobcat.getBattery());
 
 	}
@@ -62,7 +62,7 @@ public class GameEngine implements Observer {
 
 			if (isGameOver()) handleGameOver();
 
-			if (boxInPlace()){
+			if (placeableInPlace()){
 				handleLevelCompletion();
 			}
 
@@ -144,11 +144,12 @@ public class GameEngine implements Observer {
 	}
 
 	/*[CHECKS IF EACH TARGET HAS A BOX IN THE SAME POSITION, IF ALL MATCH THAT STATMENT IT RETRUNS TRUE]*/
-	private boolean boxInPlace() {
+	private boolean placeableInPlace() {
 		return level.getAlvos().stream()
+				//Verifies if every "Alvo" has (at least) one instance of a placeable object in the same position
 				.allMatch(alvo -> level.getTileMap().stream()
 						.filter(ge -> ge instanceof Placeable)
-						.map(ge -> (Placeable) ge)
+						.map(ge -> (GameElement) ge)
 						.anyMatch(pl -> pl.getPosition().equals(alvo.getPosition())));
 	}
 

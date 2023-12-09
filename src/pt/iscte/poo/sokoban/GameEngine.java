@@ -147,8 +147,8 @@ public class GameEngine implements Observer {
 	private boolean boxInPlace() {
 		return level.getAlvos().stream()
 				.allMatch(alvo -> level.getTileMap().stream()
-						.filter(ge -> ge instanceof Placable)
-						.map(ge -> (Placable) ge)
+						.filter(ge -> ge instanceof Placeable)
+						.map(ge -> (Placeable) ge)
 						.anyMatch(pl -> pl.getPosition().equals(alvo.getPosition())));
 	}
 

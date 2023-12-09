@@ -23,7 +23,7 @@ public class Level {
 	List<Teleport> teleportes;
 	List<Hole> buracos;
 	List<Box> caixotes;
-	List<Placable> placableObjects;
+	List<Placeable> placableObjects;
 	/* [GUI] */
 	private ImageMatrixGUI gui;
 
@@ -194,11 +194,11 @@ public class Level {
 		return buracos;
 	}
 
-	private List<Placable> loadPlacable(){
+	private List<Placeable> loadPlacable(){
 		placableObjects = new ArrayList<>();
 		for (GameElement ge : tileMap) {
-			if (ge instanceof Placable) {
-				placableObjects.add((Placable) ge);
+			if (ge instanceof Placeable) {
+				placableObjects.add((Placeable) ge);
 			}
 		}
 		return placableObjects;
@@ -272,7 +272,7 @@ public class Level {
 //		return caixotes;
 //	}
 
-	public List<Placable> getPlacable(){
+	public List<Placeable> getPlacable(){
 		return placableObjects;
 	}
 

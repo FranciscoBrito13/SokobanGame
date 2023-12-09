@@ -124,7 +124,7 @@ public class Bobcat extends GameElement implements Movable {
 		inventory.add(item);
 	}
 	
-	/*[REMOVES ALL INSTANCES OF THE MUDBUCKET IN THE INVENTORY (Limit should always be 1 tho)]*/
+	/*[REMOVES ALL INSTANCES OF THE MUDBUCKET IN THE INVENTORY (Limit should always be 1)]*/
 	public void removeMudBucket(){
 		inventory.removeIf(ge -> ge instanceof MudBucket);
 	}

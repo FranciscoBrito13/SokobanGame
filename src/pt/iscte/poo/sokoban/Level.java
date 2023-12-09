@@ -139,6 +139,7 @@ public class Level {
 				y++;
 
 			}
+			s.close();
 			loadAlvos();
 			loadTeleportes();
 			loadBuracos();
